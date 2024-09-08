@@ -6,7 +6,14 @@
 
 ## Sovelluksen tarkoitus
 
-## Perusversion toiminallisuudet
+Rent&Stay on web-sovellus, jossa käyttäjät voivat vuokrata ja asettaa kiinteistöjä vuokralle vaivattomasti.
+Sovelluksen keskeiset toiminnot:
+
+- kirjautuminen
+- käyttäjän lisääminen/poistaminen
+- vuokrattavan kohteen lisääminen/poistaminen sovellukseen käyttäjäkohtaisesti
+
+## Perusversion toiminallisuudet (tämänhetkiset)
 
 ## Perusversion tavoite-toiminallisuudet
 
