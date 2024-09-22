@@ -15,6 +15,10 @@ Sovelluksen keskeiset toiminnot:
 
 ## Perusversion toiminallisuudet (tämänhetkiset)
 
+- voidaan luoda käyttäjä (havaittavissa tietokannassa muutoksena)
+- salasanan salaus
+- ensimmäiset viikot menivät asioiden kertaamisessa ja materiaalin esimerkkien läpikäynnissä...
+
 ## Perusversion tavoite-toiminallisuudet
 
 ### Tuotannon kehitysideoita/ -taskeja

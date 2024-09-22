@@ -1,4 +1,12 @@
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+
+{% if goodmsg %}
+<p style="color: green;">{{ goodmsg }}</p>
+{% endif %}
+
 <p>Rent&Stay</p>
 <form action="/loginview" method="get">
-   <button type="submit">Rekisteröidy</button>
+   <button type="submit">Kirjaudu</button>
 </form>

@@ -51,4 +51,4 @@ def createuser():
     db.session.execute(sql, {"username": username, "password": hash_value})
     db.session.commit()
 
-    return redirect("/")
+    return render_template("index.html", goodmsg="Username succesfully created")
