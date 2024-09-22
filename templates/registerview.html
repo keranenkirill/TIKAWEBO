@@ -1,0 +1,17 @@
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+{% if goodmsg %}
+<p style="color: green;">{{ goodmsg }}</p>
+{% endif %}
+
+
+<form action="/createuser" method="POST">
+   <p>Tunnus:<br>
+      <input type="text" name="username"></p>
+   <p>Salasana:<br>
+      <input type="password" name="password1"></p>
+   <p>Salasana uudestaan:<br>
+      <input type="password" name="password2"></p>
+   <input type="submit" value="Rekistöröidy">
+</form>
