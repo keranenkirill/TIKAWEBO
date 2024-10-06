@@ -20,6 +20,6 @@ Sovellus käyttää PostgreSQL-tietokantaa. Seuraavat taulut löytyvät:
 - properties: Vuokrattavat asunnot (id, title, price, description, image_url, user_id).
 - bookings: Varaukset (id, property_id, user_id, start_date, end_date).
 
-Käyttäjän lisäämät kuvat tallennetaan static/images/-kansioon ja liitetään kohteen tietoihin tietokannan kautta. Kuvien maksimikoko on 2 MB.S
+Käyttäjän lisäämät kuvat tallennetaan static/images/-kansioon ja liitetään kohteen tietoihin tietokannan kautta. Kuvien maksimikoko on 2 MB
 
 ### Tuotannon kehitysideoita/ -taskeja
