@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+
+        {% from "messages.html" import display_message %}
+        {{ display_message(error, goodmsg) }}
+
+        <!-- Check if the user is logged in -->
+        {% if session.username %}
+        
+        <!-- Display user profile details -->
+        <div class="profile-details">
+            <h2>Welcome, <strong>{{ session.username }}</strong>!</h2>
+            <!-- If you store additional user details such as email, display them here -->
+        </div>
+
+        <!-- List of properties rented by the user -->
+        <h3>Your Rented Properties:</h3>
+        <div class="property-list">
+            {% if rented_properties %}
+                {% for property in rented_properties %}
+                    <div class="property">
+                        <h4>{{ property.title }}</h4>
+                        <p><strong>Price:</strong> ${{ property.price }}</p>
+                        <p>{{ property.description }}</p>
+                        <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}" style="width:100%; height:auto;">
+                        <p><strong>Booking Dates:</strong> {{ property.start_date }} to {{ property.end_date }}</p>
+
+                        <form action="/delete_booking/{{ property.booking_id }}" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete Booking</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You haven't rented any properties yet.</p>
+            {% endif %}
+        </div>
+
+        {% else %}
+        <p>You are not logged in. Please <a href="/loginview">log in</a> to view your profile.</p>
+        {% endif %}
+
+        <form action="/" method="get">
+            <button type="submit" class="btn">Back to Home</button>
+        </form>
+    </div>
+</body>
+</html>

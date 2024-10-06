@@ -1,18 +1,34 @@
-{% if error %}
-<p style="color: red;">{{ error }}</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        {% from "messages.html" import display_message %}
+        {{ display_message(error, goodmsg) }}
 
-{% if goodmsg %}
-<p style="color: green;">{{ goodmsg }}</p>
-{% endif %}
-
-<form action="/login" method="POST"></form>
-   <p>Tunnus:<br>
-      <input type="text" name="username"></p>
-   <p>Salasana:<br>
-      <input type="password" name="password"></p>
-      <input type="submit" value="Kirjaudu">
-</form>
-<a href="/registerview">
-   <button type="button">Rekisteröidy</button>
-</a>
+        {% if session.username %}
+        <p class="welcome-msg">logged in as <strong>{{ session.username }}</strong></p>
+        <a href="/logout" class="btn">Log out</a>
+        {% else %}
+        <form action="/login" method="POST" class="form">
+            <div class="form-group">
+                <label for="username">username:</label>
+                <input type="text" name="username" id="username" required aria-label="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">password:</label>
+                <input type="password" name="password" id="password" required aria-label="Password">
+            </div>
+            <button type="submit" class="btn">login</button>
+        </form>
+        <a href="/registerview" class="link">register</a>
+        {% endif %}
+    </div>
+</body>
+</html>

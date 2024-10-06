@@ -1,54 +1,35 @@
 from flask import Flask
-from flask import redirect, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import text
-from werkzeug.security import check_password_hash, generate_password_hash
+from db import init_db
+from user_routes import init_user_routes
+from property_routes import init_property_routes
 from os import getenv
 
+"""
+This module sets up and runs the Flask application.
+
+Functions:
+    None
+
+Variables:
+    app (Flask): The Flask application instance.
+
+Usage:
+    This script initializes the Flask application, sets up the database connection,
+    and registers the user and property routes. It also sets the secret key for the
+    application from environment variables.
+
+Attributes:
+    app (Flask): The Flask application instance.
+    app.secret_key (str): The secret key for the Flask application, retrieved from environment variables.
+"""
+
 app = Flask(__name__)
-# koodi määrittelee osoitteen, jonka kautta tietokantaan saadaan yhteys
-app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
-# sekä luo db-olion, jonka avulla sovellus voi suorittaa SQL-komentoja.
-db = SQLAlchemy(app)
+app.secret_key = getenv("SECRET_KEY")
 
+init_db(app)
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+init_user_routes(app)
+init_property_routes(app)
 
-
-@app.route("/loginview")
-def login():
-    return render_template("loginview.html")
-
-
-@app.route("/registerview")
-def registerview():
-    return render_template("registerview.html")
-
-
-@app.route("/createuser", methods=["POST"])
-def createuser():
-    username = request.form["username"]
-    psswd1 = request.form["password1"]
-    psswd2 = request.form["password2"]
-
-    if not username or not psswd1 or not psswd2:
-        return render_template("registerview.html", error="Please fill all fields")
-    if psswd1 != psswd2:
-        return render_template("registerview.html", error="Passwords do not match")
-
-    # Check if the username already exists
-    sql = text("SELECT id FROM users WHERE username=:username")
-    result = db.session.execute(sql, {"username": username})
-    if result.fetchone():
-        return render_template("registerview.html", error="Username already exists")
-
-    # If everything is fine, create the user
-    hash_value = generate_password_hash(psswd1)
-    sql = text(
-        "INSERT INTO users (username, password) VALUES (:username, :password)")
-    db.session.execute(sql, {"username": username, "password": hash_value})
-    db.session.commit()
-
-    return render_template("index.html", goodmsg="Username succesfully created")
+if __name__ == "__main__":
+    app.run()

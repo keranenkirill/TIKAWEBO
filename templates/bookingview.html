@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Property</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Property: {{ property.title }}</h1>
+
+        {% from "messages.html" import display_message %}
+        {{ display_message(error, goodmsg) }}
+
+        <!-- Display property details -->
+        <div class="property-details">
+            <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}" style="width:100%; height:300x;">
+            <p><strong>Price:</strong> ${{ property.price }}</p>
+            <p><strong>Description:</strong> {{ property.description }}</p>
+        </div>
+
+        <!-- Check if the user is logged in -->
+        {% if session.username %}
+        <!-- Booking form for logged-in users -->
+        <form action="/book_property/{{ property.id }}" method="POST" class="form">
+            <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" name="end_date" id="end_date" required>
+            </div>
+
+            <button type="submit" class="btn">Book Now</button>
+        </form>
+
+        {% else %}
+        <!-- Message for not logged-in users -->
+        <p class="error-message">You need to <a href="/loginview">log in</a> to book this property.</p>
+        {% endif %}
+
+        <!-- Back to Index button -->
+        <form action="/" method="get">
+            <button type="submit" class="btn">Back to Main</button>
+        </form>
+    </div>
+</body>
+</html>

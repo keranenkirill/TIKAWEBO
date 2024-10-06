@@ -1,17 +1,37 @@
-{% if error %}
-<p style="color: red;">{{ error }}</p>
-{% endif %}
-{% if goodmsg %}
-<p style="color: green;">{{ goodmsg }}</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        {% from "messages.html" import display_message %}
+        {{ display_message(error, goodmsg) }}
 
-
-<form action="/createuser" method="POST">
-   <p>Tunnus:<br>
-      <input type="text" name="username"></p>
-   <p>Salasana:<br>
-      <input type="password" name="password1"></p>
-   <p>Salasana uudestaan:<br>
-      <input type="password" name="password2"></p>
-   <input type="submit" value="Rekistöröidy">
-</form>
+        {% if session.username %}
+        <p class="welcome-msg">logged in as<strong>{{ session.username }}</strong></p>
+        <a href="/logout" class="btn">log out</a>
+        {% else %}
+        <form action="/createuser" method="POST" class="form">
+            <div class="form-group">
+                <label for="username">username:</label>
+                <input type="text" name="username" id="username" required aria-label="Username">
+            </div>
+            <div class="form-group">
+                <label for="password1">password:</label>
+                <input type="password" name="password1" id="password1" required aria-label="Password">
+            </div>
+            <div class="form-group">
+                <label for="password2">passworda again:</label>
+                <input type="password" name="password2" id="password2" required aria-label="Confirm Password">
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

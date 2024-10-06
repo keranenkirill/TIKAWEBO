@@ -1,0 +1,8 @@
+{% macro display_message(error, goodmsg) %}
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if goodmsg %}
+    <p style="color: green;">{{ goodmsg }}</p>
+    {% endif %}
+{% endmacro %}
