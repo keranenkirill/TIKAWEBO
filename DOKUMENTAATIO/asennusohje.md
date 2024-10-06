@@ -1,23 +1,35 @@
 # Asennusohje - Rent&Stay
 
+(Tässä asennusohjeessa ei huomioida projektin asennusta Windows-koneelle)
+
 1. Lataa projekti GitHubista
 
 2. Virtuaaliympäristön luominen ja aktivoiminen:
    Virtuaaliympäristö auttaa hallitsemaan projektisi riippuvuuksia ja estämään ristiriitoja muiden projektien kanssa.
 
-   - python3 -m venv venv
-     Aktivoi virtuaaliympäristö
-   - source venv/bin/activate
+   ```bash
+   python3 -m venv venv
+   ```
 
-3. Riippuvuuksien asentaminen:
+3. Aktivoi virtuaaliympäristö:
 
-   - pip install -r requirements.txt
+   ```bash
+   source venv/bin/activate
+   ```
 
-4. Ympäristömuuttujien asettaminen (.env-tiedosto):
+4. Riippuvuuksien asentaminen:
 
-   - touch .env
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-5. Avaa .env-tiedosto tekstieditorilla ja lisää sinne seuraavat tiedot:
+5. Ympäristömuuttujien asettaminen (.env-tiedosto):
+
+   ```bash
+   touch .env
+   ```
+
+6. Avaa .env-tiedosto tekstieditorilla ja lisää sinne seuraavat tiedot:
 
    ```bash
    DATABASE_URL=postgresql://username:password@localhost/tikawebo
@@ -25,7 +37,7 @@
    SECRET_KEY= ## generoi oma avain ##
    ```
 
-6. Tietokannan luominen ja alustaminen
+7. Tietokannan luominen ja alustaminen
 
    Varmista, että PostgreSQL-palvelin on käynnissä. Luo tietokanta nimellä, joka vastaa .env-tiedostossa määriteltyä tietokantaa:
 
@@ -49,7 +61,7 @@
    GRANT ALL PRIVILEGES ON TABLE bookings TO your_database_user;
    ```
 
-7. Projektin suorittaminen
+8. Projektin suorittaminen
 
    Kun olet määrittänyt ympäristömuuttujat ja asentanut riippuvuudet, voit käynnistää Flask-sovelluksen seuraavalla komennolla:
 
