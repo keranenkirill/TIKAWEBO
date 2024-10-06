@@ -7,6 +7,7 @@ CREATE TABLE users (
 CREATE TABLE properties (
     id SERIAL PRIMARY KEY, 
     user_id INTEGER NOT NULL REFERENCES users(id), 
+    title TEXT NOT NULL,
     price NUMERIC(10, 2) NOT NULL,  
     description TEXT NOT NULL,      
     image_url TEXT NOT NULL,        

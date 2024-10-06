@@ -71,6 +71,7 @@ def create_database():
     try:
         with open(SCHEMA_FILE, 'r') as file:
             schema_sql = file.read()
+            print(schema_sql)
             with engine.connect() as connection:
                 connection.execute(text(schema_sql))
         print()
