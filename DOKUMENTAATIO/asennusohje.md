@@ -19,20 +19,25 @@
 
 5. Avaa .env-tiedosto tekstieditorilla ja lisää sinne seuraavat tiedot:
 
+   ```bash
    DATABASE_URL=postgresql://username:password@localhost/tikawebo
 
-   SECRET_KEY= <strong>## generoi oma avain ##</strong>
+   SECRET_KEY= ## generoi oma avain ##
+   ```
 
 6. Tietokannan luominen ja alustaminen
 
    Varmista, että PostgreSQL-palvelin on käynnissä. Luo tietokanta nimellä, joka vastaa .env-tiedostossa määriteltyä tietokantaa:
 
-   - createdb tikawebo
+   ```bash
+   createdb tikawebo
+   ```
 
    Kun suoritat projektin ensimmäistä kertaa, sovellus tarkistaa tietokannan olemassaolon ja luo sen automaattisesti käyttämällä schema.sql-tiedostoa, mikäli tietokantaa ei vielä ole.
 
    :warning: Mikäli terminaalissa tulee ilmoitus, tyyliin "ei ole oikeuksia tehdä muutoksia tietokantaan tietokantakäyttäjällä X", kokeile seuraavia tietokantaskriptejä
 
+   ```bash
    sudo -i -u postgres psql
 
    GRANT USAGE, SELECT ON SEQUENCE properties_id_seq TO your_database_user;
@@ -42,9 +47,12 @@
    GRANT ALL PRIVILEGES ON TABLE properties TO your_database_user;
    GRANT ALL PRIVILEGES ON TABLE users TO your_database_user;
    GRANT ALL PRIVILEGES ON TABLE bookings TO your_database_user;
+   ```
 
 7. Projektin suorittaminen
 
    Kun olet määrittänyt ympäristömuuttujat ja asentanut riippuvuudet, voit käynnistää Flask-sovelluksen seuraavalla komennolla:
 
-   - flask run
+   ```bash
+   flask run
+   ```
