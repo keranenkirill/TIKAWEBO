@@ -16,9 +16,9 @@ Käyttäjät voivat rekisteröityä, kirjautua sisään ja ulos, hallita varauks
 
 Sovellus käyttää PostgreSQL-tietokantaa. Seuraavat taulut löytyvät:
 
-users: Käyttäjien tiedot (id, username, password).
-properties: Vuokrattavat asunnot (id, title, price, description, image_url, user_id).
-bookings: Varaukset (id, property_id, user_id, start_date, end_date).
+- users: Käyttäjien tiedot (id, username, password).
+- properties: Vuokrattavat asunnot (id, title, price, description, image_url, user_id).
+- bookings: Varaukset (id, property_id, user_id, start_date, end_date).
 
 Käyttäjän lisäämät kuvat tallennetaan static/images/-kansioon ja liitetään kohteen tietoihin tietokannan kautta. Kuvien maksimikoko on 2 MB.S
 
