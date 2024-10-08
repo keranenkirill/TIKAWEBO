@@ -73,4 +73,4 @@
    ```
 
    Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
-   [_käyttöohje_](DOKUMENTAATIO/asennusohje.md)
+   [_käyttöohje_](asennusohje.md)
