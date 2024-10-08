@@ -67,13 +67,5 @@
    flask run
    ```
 
-   Tähän komentoon on integroitu tietokantataulujen automaattinen alustus
-
-   Kun olet määrittänyt ympäristömuuttujat ja asentanut riippuvuudet, voit käynnistää Flask-sovelluksen seuraavalla komennolla:
-
-   ```bash
-   flask run
-   ```
-
    Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
    [_käyttöohje_](DOKUMENTAATIO/asennusohje.md)
