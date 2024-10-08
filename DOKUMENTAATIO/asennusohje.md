@@ -59,7 +59,7 @@
 
 7. Web-sovelluksen käynnistäminen:
 
-   Postgresql:ssä on suositeltavaa jokaiselle projektille luoda oma tietokanta-käyttäjä.
+   Postgresql:ssä on suotavaa jokaiselle projektille luoda oma tietokanta-käyttäjä.
    Tämä hoituu terminaalissa komennolla:
 
    ```bash
@@ -73,4 +73,4 @@
    ```
 
    Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
-   [_käyttöohje_](/asennusohje.md)
+   [_käyttöohje_](DOKUMENTAATIO/asennusohje.md)
