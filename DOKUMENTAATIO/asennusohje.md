@@ -14,7 +14,7 @@
    mene siis projektin kotihakemistoon, jonka tulisi näyttää tältä:
 
    ```bash
-   ~/Documents/TKT/TIKAWEBO_S24/TIKAWEBO$
+   ~/.../TIKAWEBO$
    ```
 
    suorita a.o komento, joka luo projektille virtuaaliympäristön
