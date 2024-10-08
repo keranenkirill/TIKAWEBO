@@ -1,8 +1,9 @@
 # Rent&Stay - web sovellus
 
-- [ASENNUSOHJE & KÄYTTÖOHJE](DOKUMENTAATIO/asennusohje.md).
-  <br>
-  <br>
+[ASENNUSOHJE & KÄYTTÖOHJE](DOKUMENTAATIO/asennusohje.md).
+<br>
+<br>
+
 - [_kirjanpito & työtila_](https://trello.com/invite/b/66dd979b69f8fe952329e9df/ATTIdecd3e46f5556f7fad0b770e17d14b7f159592A9/tikawebo)
 - [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](DOKUMENTAATIO/chatgpt_selvitys.md)asennusohjeet & käyttöohjeet
 
