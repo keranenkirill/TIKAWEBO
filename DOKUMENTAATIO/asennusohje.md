@@ -3,14 +3,19 @@
 (Tässä asennusohjeessa ei huomioida projektin asennusta Windows-koneelle)
 
 1. Lataa projekti GitHubista
-   '''bash
+
+   ```bash
    git clone https://github.com/keranenkirill/TIKAWEBO.git
-   '''
+   ```
 
 2. Virtuaaliympäristön luominen ja aktivoiminen:
    Virtuaaliympäristö auttaa hallitsemaan projektisi riippuvuuksia ja estämään ristiriitoja muiden projektien kanssa.
 
-   mene siis projektin kotihakemistoon, jonka tulisi näyttää tältä: ~/Documents/TKT/TIKAWEBO_S24/TIKAWEBO$
+   mene siis projektin kotihakemistoon, jonka tulisi näyttää tältä:
+
+   ```bash
+   ~/Documents/TKT/TIKAWEBO_S24/TIKAWEBO$
+   ```
 
    suorita a.o komento, joka luo projektille virtuaaliympäristön
 
