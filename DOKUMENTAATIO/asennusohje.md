@@ -45,6 +45,7 @@
    ```
 
    oman avaimen generointi:
+
    '''bash
    $ python3
    import secrets
@@ -55,11 +56,13 @@
 
    Postgresql:ssä on suotavaa jokaiselle projektille luoda oma tietokanta-käyttäjä.
    Tämä hoituu terminaalissa komennolla:
+
    '''bash
    psql -d postgres -f ./scripts/initdb.sql
    '''
 
    tämän jäkeen voidaan suorittaa sovelluksen käynnistyskomento:
+
    '''bash
    flask run
    '''
