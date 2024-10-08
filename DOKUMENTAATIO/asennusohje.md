@@ -73,4 +73,4 @@
    ```
 
    Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
-   [_käyttöohje_](https://github.com/keranenkirill/TIKAWEBO/blob/main/DOKUMENTAATIO/k%C3%A4ytt%C3%B6ohje.md)
+   [KÄYTTÖOHJE](https://github.com/keranenkirill/TIKAWEBO/blob/main/DOKUMENTAATIO/k%C3%A4ytt%C3%B6ohje.md)
