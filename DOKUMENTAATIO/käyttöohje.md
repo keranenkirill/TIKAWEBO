@@ -3,7 +3,7 @@
 ...dietostokansiossa
 
 ```bash
-exmpl_prprt_img
+TIKAWEBO/static/exmpl_prprt_img
 ```
 
 on valmiiksi muutamia kuvia, jota voidaan käyttää vuokrattavien kohteiden lisäämisessä.
