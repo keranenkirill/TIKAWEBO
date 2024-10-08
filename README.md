@@ -1,10 +1,10 @@
 # Rent&Stay - web sovellus
 
-- [_asennusohjeet & käyttöohjeet_](DOKUMENTAATIO/asennusohje.md).
+- [ASENNUSOHJE & KÄYTTÖOHJE](DOKUMENTAATIO/asennusohje.md).
   <br>
   <br>
 - [_kirjanpito & työtila_](https://trello.com/invite/b/66dd979b69f8fe952329e9df/ATTIdecd3e46f5556f7fad0b770e17d14b7f159592A9/tikawebo)
-- [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](DOKUMENTAATIO/chatgpt_selvitys.md)
+- [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](DOKUMENTAATIO/chatgpt_selvitys.md)asennusohjeet & käyttöohjeet
 
 ## Sovelluksen tarkoitus
 
@@ -12,7 +12,7 @@ Rent&Stay on verkkosovellus, jonka avulla käyttäjät voivat kirjautua sisään
 
 ### Toiminallisuus
 
-Käyttäjät voivat rekisteröityä, kirjautua sisään ja ulos, hallita varauksiaan, sekä lisätä vuokrattavia kohteita. Kirjautumisen yhteydessä käytetään salasanojen hajauttamista.
+Käyttäjät voivat rekisteröityä, kirjautua sisään ja ulos, hallita varauksiaan (lisääminen/poistaminen), sekä lisätä vuokrattavia kohteita. Kirjautumisen yhteydessä käytetään salasanojen hajauttamista.
 
 ### Tietokanta
 
@@ -25,3 +25,14 @@ Sovellus käyttää PostgreSQL-tietokantaa. Seuraavat taulut löytyvät:
 Käyttäjän lisäämät kuvat tallennetaan static/images/-kansioon ja liitetään kohteen tietoihin tietokannan kautta. Kuvien maksimikoko on 2 MB
 
 ### Tuotannon kehitysideoita/ -taskeja
+
+#### kehityksessä:
+
+- virheviestien yms. näyttäminen käyttäjälle
+- tietokanta-taulujen laajentaminen
+- käyttäjän palveluun luotujen vuokrakohteiden poistaminen (toistaiseksi vain lisäys toimii)
+
+#### kehitysideoita
+
+- tykkäykset
+- kommenttien luominen
