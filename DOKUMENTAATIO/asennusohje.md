@@ -75,4 +75,4 @@
    ```
 
    Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
-   :arrow*right: [\_käyttöohje*](DOKUMENTAATIO/asennusohje.md).
+   [_käyttöohje_](DOKUMENTAATIO/asennusohje.md)
