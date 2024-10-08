@@ -1,10 +1,12 @@
-CREATE TABLE users (
+
+
+CREATE TABLE if not exists users (
     id SERIAL PRIMARY KEY, 
     username TEXT NOT NULL, 
     password TEXT NOT NULL 
 );
 
-CREATE TABLE properties (
+CREATE TABLE if not exists properties (
     id SERIAL PRIMARY KEY, 
     user_id INTEGER NOT NULL REFERENCES users(id), 
     title TEXT NOT NULL,
@@ -15,7 +17,7 @@ CREATE TABLE properties (
 );
 
 
-CREATE TABLE bookings (
+CREATE TABLE if not exists bookings (
     id SERIAL PRIMARY KEY,
     property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -28,6 +30,4 @@ CREATE TABLE bookings (
 CREATE INDEX idx_properties_user_id ON properties(user_id);
 CREATE INDEX idx_bookings_property_id ON bookings(property_id);
 CREATE INDEX idx_bookings_user_id ON bookings(user_id);
-
-
 

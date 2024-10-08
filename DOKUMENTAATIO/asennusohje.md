@@ -3,13 +3,22 @@
 (Tässä asennusohjeessa ei huomioida projektin asennusta Windows-koneelle)
 
 1. Lataa projekti GitHubista
+   '''bash
+   git clone https://github.com/keranenkirill/TIKAWEBO.git
+   '''
 
 2. Virtuaaliympäristön luominen ja aktivoiminen:
    Virtuaaliympäristö auttaa hallitsemaan projektisi riippuvuuksia ja estämään ristiriitoja muiden projektien kanssa.
 
+   mene siis projektin kotihakemistoon, jonka tulisi näyttää tältä: ~/Documents/TKT/TIKAWEBO_S24/TIKAWEBO$
+
+   suorita a.o komento, joka luo projektille virtuaaliympäristön
+
    ```bash
    python3 -m venv venv
    ```
+
+   [_asennusohjeet & käyttöohjeet_](DOKUMENTAATIO/asennusohje.md).
 
 3. Aktivoi virtuaaliympäristö:
 
@@ -29,51 +38,41 @@
    touch .env
    ```
 
-6. Avaa .env-tiedosto tekstieditorilla ja lisää sinne seuraavat tiedot:
+6. Avaa .env-tiedosto tekstieditorilla ja lisää sinne seuraavat rivit:
 
    ```bash
-   DATABASE_URL=postgresql://postgres:postgrespsql@localhost/rsdb
+   DATABASE_URL=postgresql://rsuser:rspass@localhost/rsdb
 
    SECRET_KEY= ## generoi oma avain ##
    ```
 
-7. Tietokannan luominen ja alustaminen
-
-   Varmista, että PostgreSQL-palvelin on asennettu ja käynnissä terminaalissa.
-   Luo tietokanta "rsdb" joka vastaa .env-tiedostossa määriteltyä tietokantaa:
-
-   ```bash
-   postgres=# CREATE DATABASE rsdb;
-   ```
-
-   siirry tietokantaan rsdb:
-
+   oman avaimen generointi:
    '''bash
-   postgres=# \c rsdb
-   You are now connected to database "rsdb" as user "postgres".
-   rsdb=#
+   $ python3
+   import secrets
+   secrets.token_hex(16)
    '''
 
-8. Tietokannan alustus tauluilla
+7. Web-sovelluksen käynnistäminen:
 
-   Kun suoritat projektin ensimmäistä kertaa, sovellus tarkistaa tietokannan olemassaolon ja luo sen automaattisesti käyttämällä schema.sql-tiedostoa, mikäli tietokantaa ei vielä ole.
-
-   :warning: Mikäli tietokanta ei automaattisesti alustu, alla on manuaalisen alustamisen skripti:
-
+   Postgresql:ssä on suotavaa jokaiselle projektille luoda oma tietokanta-käyttäjä.
+   Tämä hoituu terminaalissa komennolla:
    '''bash
-   sudo -i -u postgres psql -d rsdb < schema.sql
+   psql -d postgres -f ./scripts/initdb.sql
    '''
 
-   terminaalissa voit tarkistaa taulujen olemassaolon:
-
+   tämän jäkeen voidaan suorittaa sovelluksen käynnistyskomento:
    '''bash
-   rsdb=# \dt
+   flask run
    '''
 
-9. Projektin suorittaminen
+   Tähän komentoon on integroitu tietokantataulujen automaattinen alustus
 
    Kun olet määrittänyt ympäristömuuttujat ja asentanut riippuvuudet, voit käynnistää Flask-sovelluksen seuraavalla komennolla:
 
    ```bash
    flask run
    ```
+
+   Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
+   :arrow*right: [\_käyttöohje*](DOKUMENTAATIO/asennusohje.md).
