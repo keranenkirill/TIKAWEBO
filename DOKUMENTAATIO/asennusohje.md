@@ -46,26 +46,26 @@
 
    oman avaimen generointi:
 
-   '''bash
+   ```bash
    $ python3
    import secrets
    secrets.token_hex(16)
-   '''
+   ```
 
 7. Web-sovelluksen käynnistäminen:
 
    Postgresql:ssä on suotavaa jokaiselle projektille luoda oma tietokanta-käyttäjä.
    Tämä hoituu terminaalissa komennolla:
 
-   '''bash
+   ```bash
    psql -d postgres -f ./scripts/initdb.sql
-   '''
+   ```
 
    tämän jäkeen voidaan suorittaa sovelluksen käynnistyskomento:
 
-   '''bash
+   ```bash
    flask run
-   '''
+   ```
 
    Tähän komentoon on integroitu tietokantataulujen automaattinen alustus
 
