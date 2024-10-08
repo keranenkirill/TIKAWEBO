@@ -18,8 +18,6 @@
    python3 -m venv venv
    ```
 
-   [_asennusohjeet & käyttöohjeet_](DOKUMENTAATIO/asennusohje.md).
-
 3. Aktivoi virtuaaliympäristö:
 
    ```bash
