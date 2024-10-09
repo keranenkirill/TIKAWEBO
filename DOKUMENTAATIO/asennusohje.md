@@ -4,8 +4,6 @@
 
 #### Tämä asennusohje toimii ongelmitta, mikäli ET ole asentanut PostgreSQL:ää kurssin asennusskritptillä, vaan PostgreSQL:n omilta sivuilta
 
-#### lisäohje kurssin [**asennusskritptillä asentaneille**](./asennusohje_kurssi_skripti.md)
-
 1. Lataa projekti GitHubista
 
    ```bash
@@ -75,6 +73,8 @@
    ```bash
    flask run
    ```
+
+   #### lisäohje kurssin [**asennusskritptillä asentaneille**](./asennusohje_kurssi_skripti.md)
 
    Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
    [KÄYTTÖOHJE](https://github.com/keranenkirill/TIKAWEBO/blob/main/DOKUMENTAATIO/k%C3%A4ytt%C3%B6ohje.md)
