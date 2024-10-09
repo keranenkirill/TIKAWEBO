@@ -29,7 +29,6 @@ Käyttäjän lisäämät kuvat tallennetaan static/images/-kansioon ja liitetä�
 
 #### kehityksessä:
 
-- virheviestien yms. näyttäminen käyttäjälle
 - tietokanta-taulujen laajentaminen
 - käyttäjän palveluun luotujen vuokrakohteiden poistaminen (toistaiseksi vain lisäys toimii)
 - esimerkkikuvie muokkaus samankokoisiksi
