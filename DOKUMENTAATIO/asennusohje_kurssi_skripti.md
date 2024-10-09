@@ -10,6 +10,7 @@ nano /home/kayttajanimi/pgsql/data/postgresql.conf:
 ```
 
 ![](./kayttoohje_kuvat/photo_2024-10-09_12-12-30.jpg)
+
 jossa **listen_addresses** oli ='' ja muutettu '\*'
 
 seuraavaksi:
@@ -19,6 +20,7 @@ nano /home/luee/pgsql/data/pg_hba.conf
 ```
 
 ![](./kayttoohje_kuvat/photo_2024-10-09_12-12-53.jpg)
+
 I**Pv6 ja IPv4** on **reject**, muuta **trust**
 
 kun yllä olevat modifikaaiot on tehty:
