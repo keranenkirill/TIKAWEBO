@@ -4,6 +4,8 @@
 
 #### Tämä asennusohje toimii ongelmitta, mikäli ET ole asentanut PostgreSQL:ää kurssin asennusskritptillä, vaan PostgreSQL:n omilta sivuilta
 
+#### lisäohje kurssin [**asennusskritptillä asentaneille**](./asennusohje_kurssi_skripti.md)
+
 1. Lataa projekti GitHubista
 
    ```bash

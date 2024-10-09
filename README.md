@@ -1,6 +1,6 @@
 # Rent&Stay - web sovellus
 
-[ASENNUSOHJE & KÄYTTÖOHJE](DOKUMENTAATIO/asennusohje.md).
+[**ASENNUSOHJE & KÄYTTÖOHJE**](DOKUMENTAATIO/asennusohje.md)
 <br>
 <br>
 
