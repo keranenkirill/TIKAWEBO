@@ -2,6 +2,8 @@
 
 (Tässä asennusohjeessa ei huomioida projektin asennusta Windows-koneelle)
 
+### tämä asennusohje toimii ongelmitta, mikäli ET ole asentanut PostgreSQL:ää kurssin asennusskritptillä, vaan PostgreSQL:n omilta sivuilta
+
 1. Lataa projekti GitHubista
 
    ```bash
