@@ -109,12 +109,15 @@ def init_user_routes(app):
         psswd2 = request.form["password2"]
 
         if not username or not psswd1 or not psswd2:
-            return render_template("registerview.html", error="Please fill all fields")
+            flash('Passwords do not match.', 'error')  # Flash error message
+            return render_template("registerview.html")
         if psswd1 != psswd2:
-            return render_template("registerview.html", error="Passwords do not match")
+            flash('Passwords do not match.', 'error')  # Flash error message
+            return render_template("registerview.html")
 
         if users.check_user_in_db(username):
-            return render_template("registerview.html", error="Username already exists")
+            flash('Username already exists.', 'error')  # Flash error message
+            return render_template("registerview.html")
 
         if users.add_new_user(psswd1, username):
             flash("Username successfully created", "success")

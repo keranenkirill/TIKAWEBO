@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Register</h1>
         {% from "messages.html" import display_message %}
-        {{ display_message(error, goodmsg) }}
+        {{ display_message(get_flashed_messages(with_categories=True)) }}
 
         {% if session.username %}
         <p class="welcome-msg">logged in as<strong>{{ session.username }}</strong></p>
@@ -26,12 +26,23 @@
                 <input type="password" name="password1" id="password1" required aria-label="Password">
             </div>
             <div class="form-group">
-                <label for="password2">passworda again:</label>
+                <label for="password2">password again:</label>
                 <input type="password" name="password2" id="password2" required aria-label="Confirm Password">
             </div>
             <button type="submit" class="btn">Register</button>
         </form>
         {% endif %}
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 </html>

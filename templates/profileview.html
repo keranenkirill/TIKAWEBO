@@ -11,18 +11,13 @@
         <h1>User Profile</h1>
 
         {% from "messages.html" import display_message %}
-        {{ display_message(error, goodmsg) }}
+        {{ display_message(get_flashed_messages(with_categories=True)) }}
 
-        <!-- Check if the user is logged in -->
         {% if session.username %}
-        
-        <!-- Display user profile details -->
         <div class="profile-details">
             <h2>Welcome, <strong>{{ session.username }}</strong>!</h2>
-            <!-- If you store additional user details such as email, display them here -->
         </div>
 
-        <!-- List of properties rented by the user -->
         <h3>Your Rented Properties:</h3>
         <div class="property-list">
             {% if rented_properties %}
@@ -52,5 +47,16 @@
             <button type="submit" class="btn">Back to Home</button>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 </html>

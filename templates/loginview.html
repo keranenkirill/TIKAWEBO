@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Login</h1>
         {% from "messages.html" import display_message %}
-        {{ display_message(error, goodmsg) }}
+        {{ display_message(get_flashed_messages(with_categories=True)) }}
 
         {% if session.username %}
         <p class="welcome-msg">logged in as <strong>{{ session.username }}</strong></p>
@@ -30,5 +30,17 @@
         <a href="/registerview" class="link">register</a>
         {% endif %}
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                console.log("Hiding flash messages after 5 seconds");
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 </html>

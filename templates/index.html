@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Rent&Stay</h1>
         {% from "messages.html" import display_message %}
-        {{ display_message(error, goodmsg) }}
+        {{ display_message(get_flashed_messages(with_categories=True)) }}
 
         {% if session.username %}
         <p class="welcome-msg">Welcome, <strong>{{ session.username }}</strong>!</p>
@@ -25,7 +25,6 @@
         </form>
         {% endif %}
 
-        <!-- Display the list of properties -->
         <h2>Available Properties</h2>
         <div class="property-list">
             {% for property in properties %}
@@ -34,12 +33,23 @@
                     <p><strong>Price:</strong> ${{ property.price }}</p>
                     <p>{{ property.description }}</p>
                     <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}">
-                    <a href="/property/{{ property.id }}" class="btn">View and Book</a> <!-- Booking link -->
+                    <a href="/property/{{ property.id }}" class="btn">View and Book</a>
                 </div>
             {% else %}
                 <p>No properties available at the moment.</p>
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 </html>
