@@ -16,7 +16,7 @@ jossa **listen_addresses** oli ='' ja muutettu '\*'
 seuraavaksi:
 
 ```bash
-nano /home/luee/pgsql/data/pg_hba.conf
+nano /home/kayttajanimi/pgsql/data/pg_hba.conf
 ```
 
 ![](./kayttoohje_kuvat/photo_2024-10-09_12-12-53.jpg)
