@@ -1,5 +1,5 @@
 Jos olet asentanut PostgreSQL:n Linuxiin käyttäen asennusskriptiä, joka on tehty tätä kurssia varten.
-Saatat törmätä seuraavan kaltaisiin [**virhetulostuksiin**](./virheilmoitukset.md), mikäli yritit suorittaa kaikki asennusohjeet edellisellä [sivulla](./asennusohje.md).
+Saatat törmätä seuraavanlaisiin [**virhetulostuksiin**](./virheilmoitukset.md), mikäli yritit suorittaa kaikki asennusohjeet edellisellä [sivulla](./asennusohje.md).
 
 Kokeile psql configin modifikaatiota:
 [Stack Overflow: linkki ongelman ratkaisuehdotukseen](https://stackoverflow.com/a/50919900)
