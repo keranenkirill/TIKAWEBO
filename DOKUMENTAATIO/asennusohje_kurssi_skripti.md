@@ -2,7 +2,7 @@ Jos olet asentanut PostgreSQL:n Linuxiin käyttäen asennusskriptiä, joka on te
 Saatat törmätä seuraavan kaltaisiin [**virhetulostuksiin**](./virheilmoitukset.md)
 
 Kokeile psql configin modifikaatiota:
-[Stack Overflow: linkki ongelman rataisuehdotukseen](https://stackoverflow.com/a/50919900)
+[Stack Overflow: linkki ongelman ratkaisuehdotukseen](https://stackoverflow.com/a/50919900)
 <br>
 
 ```bash
