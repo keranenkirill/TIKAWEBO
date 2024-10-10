@@ -14,6 +14,8 @@ psql: error: connection to server on socket "/home/kayttaja/pgsql/sock/.s.PGSQL.
 
 #### Ajettuasi komennon:
 
+(kohta, kun alustetaan tietokanta-taulut)
+
 ```bash
 flask run
 ```

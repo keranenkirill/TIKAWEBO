@@ -1,49 +1,20 @@
 \c rsdb
 
 INSERT INTO users (username, password) 
-VALUES ('john_doe', 'password123');
-
-INSERT INTO users (username, password) 
-VALUES ('jane_smith', 'pass456');
-
-INSERT INTO users (username, password) 
-VALUES ('peter_parker', 'secret789');
-
-INSERT INTO users (username, password) 
-VALUES ('bruce_wayne', 'batman123');
-
-INSERT INTO users (username, password) 
-VALUES ('clark_kent', 'superman456');
+VALUES ('admin', 'admin123');
 
 INSERT INTO properties (user_id, title, price, description, image_url) 
-VALUES (2, 'Cozy Apartment', 1500.0, 'A very cozy place to stay.', 'https://placehold.co/600x400/000000/FFFFFF.png');
+VALUES (1, 'Toms Classic Suburban Home', 2000.5, 'Enjoy a peaceful, suburban lifestyle in this cozy home from the world of Tom and Jerry. With its spacious interiors and traditional charm, this home is perfect for those who appreciate classic comfort and quiet surroundings.', 'tom_jerry_house.png');
 
 INSERT INTO properties (user_id, title, price, description, image_url) 
-VALUES (1, 'Modern Loft', 2000.5, 'Spacious loft with modern amenities.', 'https://placehold.co/600x400/000000/FFFFFF.png');
+VALUES (1, 'Planktons Secretive Chum Bucket Hideout', 1800.75, 'Dive into an undersea adventure with this unique, compact home located inside the infamous Chum Bucket! Ideal for someone who values privacy and a quirky lifestyle, this small, industrial-style home is perfect for minimalist living.', 'Plankton_House.jpg');
 
 INSERT INTO properties (user_id, title, price, description, image_url) 
-VALUES (4, 'Spacious Condo', 1800.75, 'Perfect for family vacations.', 'https://placehold.co/600x400/000000/FFFFFF.png');
+VALUES (1, 'Undersea Living at its Best', 2200.0, 'Experience a unique and whimsical living space at Patricks rent-listed house! This cozy, stone-built undersea residence is located in Bikini Bottom, close to major attractions like Jellyfish Fields and the Krusty Krab. Ideal for the laid-back individual, this charming rock-shaped home comes fully furnished with a sand bed and a spacious living area perfect for hosting starfish-style parties. Whether you love napping all day or stargazing (underwater style), Patricks house offers the perfect retreat for a relaxed, aquatic lifestyle.', 'Patrick_house.jpg');
 
 INSERT INTO properties (user_id, title, price, description, image_url) 
-VALUES (1, 'Beach House', 2200.0, 'A serene place near the beach.', 'https://placehold.co/600x400/000000/FFFFFF.png');
+VALUES (1, 'Mickys partyhouse', 1600.0, 'Enjoy Disney magic in this charming, cartoon-style house in Toontown! With its playful design and Mickey-inspired décor, this cozy home is perfect for anyone seeking a fun and whimsical living experience. Ideal for small families or Disney fans!', 'Mickeys_Country_House.jpg');
 
 INSERT INTO properties (user_id, title, price, description, image_url) 
-VALUES (3, 'Mountain Cabin', 1600.0, 'Perfect for a winter getaway.', 'https://placehold.co/600x400/000000/FFFFFF.png');
+VALUES (1, 'The Simpsons Classic Springfield Home', 1450.5, 'Live in the iconic Springfield neighborhood with this cozy, family-friendly house. Known for its warm and familiar design, this home offers a comfortable living space perfect for families or individuals who love a classic vibe.', 'simpsons_house.png');
 
-INSERT INTO properties (user_id, title, price, description, image_url) 
-VALUES (5, 'City Studio', 1450.5, 'Small but very well located.', 'simpsons_house.png');
-
-INSERT INTO bookings (property_id, user_id, start_date, end_date) 
-VALUES (1, 1, '2024-10-10', '2024-10-12');
-
-INSERT INTO bookings (property_id, user_id, start_date, end_date) 
-VALUES (2, 2, '2024-10-15', '2024-10-18');
-
-INSERT INTO bookings (property_id, user_id, start_date, end_date) 
-VALUES (3, 3, '2024-10-20', '2024-10-22');
-
-INSERT INTO bookings (property_id, user_id, start_date, end_date) 
-VALUES (4, 4, '2024-10-25', '2024-10-28');
-
-INSERT INTO bookings (property_id, user_id, start_date, end_date) 
-VALUES (5, 5, '2024-10-30', '2024-11-01');

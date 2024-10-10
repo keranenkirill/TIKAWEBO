@@ -4,57 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css"> <!-- Link to style.css -->
 </head>
 <body>
-    <div class="container">
-        <h1>User Profile</h1>
+    <main class="container">
+        <header>
+            <h1>User Profile</h1>
+        </header>
 
+        <!-- Display Flash Messages -->
         {% from "messages.html" import display_message %}
         {{ display_message(get_flashed_messages(with_categories=True)) }}
 
+
+        <div class="back-home">
+            <form action="/" method="get">
+                <button type="submit" class="btn">Main</button>
+            </form>
+        </div>
         {% if session.username %}
-        <div class="profile-details">
-            <h2>Welcome, <strong>{{ session.username }}</strong>!</h2>
-        </div>
+        <section class="profile">
+            <h2>{{ session.username }}</h2>
 
-        <h3>Your Rented Properties:</h3>
-        <div class="property-list">
-            {% if rented_properties %}
-                {% for property in rented_properties %}
-                    <div class="property">
-                        <h4>{{ property.title }}</h4>
-                        <p><strong>Price:</strong> ${{ property.price }}</p>
-                        <p>{{ property.description }}</p>
-                        <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}" style="width:100%; height:auto;">
-                        <p><strong>Booking Dates:</strong> {{ property.start_date }} to {{ property.end_date }}</p>
+            
 
-                        <form action="/delete_booking/{{ property.booking_id }}" method="POST">
-                            <button type="submit" class="btn btn-danger">Delete Booking</button>
-                        </form>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>You haven't rented any properties yet.</p>
-            {% endif %}
-        </div>
+            <!-- Toggle buttons for rented and listed properties -->
+            <div class="button-group">
+                <button id="show-rented" class="btn active">Rented</button>
+                <button id="show-listed" class="btn">Listed</button>
+            </div>
 
+            <!-- Section for rented properties -->
+            <section id="rented-properties" class="property-list">
+                <h3>Your Rented Properties</h3>
+                <p> </p>
+                {% if rented_properties %}
+                    {% for property in rented_properties %}
+                        <article class="property">
+                            <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}">
+                            <div class="property-info">
+                                <h4>{{ property.title }}</h4>
+                                <p>{{ property.description }}</p>
+                                <p><strong>Price:</strong> ${{ property.price }}</p>
+                                <p><strong>Booking Dates:</strong> {{ property.start_date }} to {{ property.end_date }}</p>
+                            </div>
+                            <form action="/delete_booking/{{ property.booking_id }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Delete Booking</button>
+                            </form>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <p>You haven't rented any properties yet.</p>
+                {% endif %}
+            </section>
+
+            <!-- Section for listed properties -->
+            <section id="listed-properties" class="property-list" style="display: none;">
+                <h3>Your Listed Properties</h3>
+                <p> </p>
+                {% if listed_properties %}
+                    {% for property in listed_properties %}
+                        <article class="property">
+                            <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}">
+                            <div class="property-info">
+                                <h4>{{ property.title }}</h4>
+                                <p><strong>Price:</strong> ${{ property.price }}</p>
+                                <p>{{ property.description }}</p>
+                            </div>
+                            <form action="/delete_property/{{ property.id }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Delete Property</button>
+                            </form>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <p>You haven't listed any properties yet.</p>
+                {% endif %}
+            </section>
+        </section>
+
+        <!-- Not logged in message -->
         {% else %}
-        <p>You are not logged in. Please <a href="/loginview">log in</a> to view your profile.</p>
+        <section class="not-logged-in">
+            <p>You are not logged in. Please <a href="/loginview">log in</a> to view your profile.</p>
+        </section>
         {% endif %}
 
-        <form action="/" method="get">
-            <button type="submit" class="btn">Back to Home</button>
-        </form>
-    </div>
+        
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const flashMessages = document.querySelectorAll('.flash-message');
-            flashMessages.forEach(function(message) {
-                setTimeout(function() {
-                    message.style.display = 'none';
-                }, 2000);
+            const rentedPropertiesSection = document.getElementById('rented-properties');
+            const listedPropertiesSection = document.getElementById('listed-properties');
+            const showRentedButton = document.getElementById('show-rented');
+            const showListedButton = document.getElementById('show-listed');
+
+            // Set initial visibility
+            rentedPropertiesSection.style.display = 'block';
+            listedPropertiesSection.style.display = 'none';
+
+            // Event listener for 'Show Rented Properties'
+            showRentedButton.addEventListener('click', function() {
+                rentedPropertiesSection.style.display = 'block';
+                listedPropertiesSection.style.display = 'none';
+                showRentedButton.classList.add('active');
+                showListedButton.classList.remove('active');
+            });
+
+            // Event listener for 'Show Listed Properties'
+            showListedButton.addEventListener('click', function() {
+                rentedPropertiesSection.style.display = 'none';
+                listedPropertiesSection.style.display = 'block';
+                showListedButton.classList.add('active');
+                showRentedButton.classList.remove('active');
             });
         });
     </script>

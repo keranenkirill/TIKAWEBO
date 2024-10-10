@@ -96,6 +96,32 @@ def get_properties_by_user(user_id):
         print(f"Error fetching properties by user: {e}")
         return []
 
+# Fetch listed properties by the user
+
+
+def get_user_listed_properties(user_id):
+    query = text("""
+    SELECT title, price, description, image_url
+    FROM properties
+    WHERE user_id = :user_id;
+    """)
+    result = db.session.execute(query, {'user_id': user_id}).fetchall()
+    print(result)
+    return result
+
+# Fetch rented properties by the user
+
+
+def get_user_rented_properties(user_id):
+    sql = text("""
+    SELECT properties.title, properties.price, properties.description, properties.image_url, 
+           bookings.start_date, bookings.end_date, bookings.id AS booking_id
+    FROM bookings
+    JOIN properties ON bookings.property_id = properties.id
+    WHERE bookings.user_id = :user_id;
+    """)
+    return db.session.execute(sql, {'user_id': user_id}).fetchall()
+
 
 def get_rented_properties(user_id):
     """

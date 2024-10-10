@@ -19,7 +19,7 @@
    ~/.../TIKAWEBO$
    ```
 
-   suorita a.o komento, joka luo projektille virtuaaliympäristön
+   Suorita a.o komento, joka luo projektille virtuaaliympäristön:
 
    ```bash
    python3 -m venv venv
@@ -51,7 +51,7 @@
    SECRET_KEY= ## generoi oma avain ##
    ```
 
-   oman avaimen generointi:
+   Oman avaimen generointi:
 
    ```bash
    $ python3
@@ -68,13 +68,32 @@
    psql -d postgres -f ./scripts/initdb.sql
    ```
 
-   tämän jäkeen voidaan suorittaa sovelluksen käynnistyskomento:
+   Kun kyse on projektin ensimmäisestä suorituskerrasta, aja komento:
 
    ```bash
    flask run
    ```
 
+   Tällä suorituskerralla alustetaan tietokanta-taulut.
+
    #### lisäohje kurssin [**asennusskritptillä asentaneille**](./asennusohje_kurssi_skripti.md)
 
-   Tämän komennon ajettuasi, projektiin alustetaan tietokanta-taulut ja ohjelma on suoritettavissa
+   Seuraavaksi suorita kaksi komentoa, jotta saadaan admin käyttäjä ja sen data tietokantaan:
+
+   ```bash
+   psql -d postgres -f ./scripts/populate.sql
+
+   ```
+
+   ja käynnistetään projekti
+
+   ```bash
+   flask run
+   ```
+
+   Nyt, ku avaat projektin, voit kirjautua esimerkkikäyttäjänä:
+   user: admin
+   password: admin123
+   Tässä lähinnä on tarkoituksena, että olisi valmiiksi kiinteistöjä mitä vuokrata, kun luot itse oman käyttäjän :blush:
+
    [KÄYTTÖOHJE](https://github.com/keranenkirill/TIKAWEBO/blob/main/DOKUMENTAATIO/k%C3%A4ytt%C3%B6ohje.md)
