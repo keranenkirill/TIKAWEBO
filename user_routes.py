@@ -62,11 +62,14 @@ def init_user_routes(app):
             return redirect("/loginview")
 
         user_id = session['user_id']
+
+        userprofile = users.get_userprofile_by_id(user_id)
+
         rented_properties = properties.get_rented_properties(
             user_id)  # Fetch rented properties
 
         listed_properties = properties.get_user_listed_properties(user_id)
-        return render_template("profileview.html", rented_properties=rented_properties, listed_properties=listed_properties)
+        return render_template("profileview.html", userprofile=userprofile, rented_properties=rented_properties, listed_properties=listed_properties)
 
     @app.route("/login", methods=["POST"])
     def login():

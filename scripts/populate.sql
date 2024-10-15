@@ -3,6 +3,9 @@
 INSERT INTO users (username, password) 
 VALUES ('admin', 'admin123');
 
+INSERT INTO user_profiles (user_id, email, phone) 
+VALUES (1, 'admin.admin@mail.mail', '1234567890');
+
 INSERT INTO properties (user_id, title, price, description, image_url) 
 VALUES (1, 'Toms Classic Suburban Home', 2000.5, 'Enjoy a peaceful, suburban lifestyle in this cozy home from the world of Tom and Jerry. With its spacious interiors and traditional charm, this home is perfect for those who appreciate classic comfort and quiet surroundings.', 'tom_jerry_house.png');
 

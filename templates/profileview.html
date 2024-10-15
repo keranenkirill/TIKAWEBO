@@ -25,11 +25,13 @@
         {% if session.username %}
         <section class="profile">
             <h2>{{ session.username }}</h2>
+            <p><strong>Email:</strong> {{ userprofile.email }}</p>
+            <p><strong>Phone:</strong> {{ userprofile.phone }}</p>
 
-            
 
             <!-- Toggle buttons for rented and listed properties -->
             <div class="button-group">
+                <button id="show-edit_profile" class="btn">Edit Profile</button>
                 <button id="show-rented" class="btn active">Rented</button>
                 <button id="show-listed" class="btn">Listed</button>
             </div>

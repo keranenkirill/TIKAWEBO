@@ -48,6 +48,28 @@ def check_user_in_db(username):
         return None
 
 
+def get_userprofile_by_id(user_id):
+    """
+    Retrieves the user profile (email and phone) for a specific user by their ID.
+
+    Parameters:
+        user_id (int): The ID of the user.
+
+    Raises:
+        Exception: If there is an error fetching the user profile.
+    """
+    try:
+        sql = text(
+            "SELECT email, phone FROM user_profiles WHERE user_id=:user_id")
+        result = db.session.execute(sql, {"user_id": user_id})
+        profile = result.fetchone()
+        return profile
+
+    except Exception as e:
+        print(f"Error fetching user profile for user {user_id}: {e}")
+        return None
+
+
 def add_new_user(psswd1, username):
     """
     Adds a new user to the database after checking that the username does not already exist.

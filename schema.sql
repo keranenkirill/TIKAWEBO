@@ -6,6 +6,16 @@ CREATE TABLE if not exists users (
     password TEXT NOT NULL 
 );
 
+-- User Profiles table
+CREATE TABLE if not exists user_profiles (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    email VARCHAR(255) DEFAULT 'email:NONE',
+    phone VARCHAR(20) DEFAULT 'phone:NONE',
+    CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
 CREATE TABLE if not exists properties (
     id SERIAL PRIMARY KEY, 
     user_id INTEGER NOT NULL REFERENCES users(id), 
@@ -26,8 +36,9 @@ CREATE TABLE if not exists bookings (
     UNIQUE(property_id, start_date, end_date)  
 );
 
-
+CREATE INDEX idx_user_id ON users (id);
 CREATE INDEX idx_properties_user_id ON properties(user_id);
 CREATE INDEX idx_bookings_property_id ON bookings(property_id);
 CREATE INDEX idx_bookings_user_id ON bookings(user_id);
+CREATE INDEX idx_profile_user ON user_profiles (user_id);
 
