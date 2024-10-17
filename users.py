@@ -7,12 +7,12 @@ def login(username):
     """
     Fetches the user's ID and hashed password from the database based on the username.
 
-    Parameters:
+    Args:
         username (str): The username of the user trying to log in.
 
     Returns:
-        result (dict or None): A dictionary containing the user's ID and hashed password if found, 
-        otherwise None.
+        dict or None: A dictionary containing the user's ID and hashed password if found, 
+                      otherwise None.
 
     Raises:
         Exception: If there is an error during the login query.
@@ -30,12 +30,12 @@ def check_user_in_db(username):
     """
     Checks if a user with the given username exists in the database.
 
-    Parameters:
+    Args:
         username (str): The username to check in the database.
 
     Returns:
-        result (dict or None): A dictionary containing the user's ID if the user exists,
-        otherwise None.
+        dict or None: A dictionary containing the user's ID if the user exists,
+                      otherwise None.
 
     Raises:
         Exception: If there is an error while checking the user in the database.
@@ -52,8 +52,12 @@ def get_userprofile_by_id(user_id):
     """
     Retrieves the user profile (email and phone) for a specific user by their ID.
 
-    Parameters:
+    Args:
         user_id (int): The ID of the user.
+
+    Returns:
+        dict or None: A dictionary containing the user's email and phone if found,
+                      otherwise None.
 
     Raises:
         Exception: If there is an error fetching the user profile.
@@ -64,39 +68,85 @@ def get_userprofile_by_id(user_id):
         result = db.session.execute(sql, {"user_id": user_id})
         profile = result.fetchone()
         return profile
-
     except Exception as e:
         print(f"Error fetching user profile for user {user_id}: {e}")
         return None
 
 
-def add_new_user(psswd1, username):
+def update_user_profile(user_id, email, phone, password):
+    """
+    Updates the user's profile information in the database.
+
+    Args:
+        user_id (int): The ID of the user whose profile is being updated.
+        email (str): The new email address for the user.
+        phone (str): The new phone number for the user.
+        password (str): The new password for the user.
+
+    Returns:
+        bool: True if the profile was successfully updated, False otherwise.
+
+    Raises:
+        Exception: If there is an error during the profile update.
+    """
+    try:
+        hash_value = generate_password_hash(password)
+        sql = text(
+            "UPDATE user_profiles SET email=:email, phone=:phone WHERE user_id=:user_id")
+        db.session.execute(
+            sql, {"email": email, "phone": phone, "user_id": user_id})
+
+        sql_password = text(
+            "UPDATE users SET password=:password WHERE id=:user_id")
+        db.session.execute(
+            sql_password, {"password": hash_value, "user_id": user_id})
+
+        db.session.commit()
+        return True
+    except Exception as e:
+        print(f"Error updating user profile: {e}")
+        db.session.rollback()
+        return False
+
+
+def add_new_user(psswd1, username, email, phone):
     """
     Adds a new user to the database after checking that the username does not already exist.
     The password is hashed before storing it in the database.
 
-    Parameters:
+    Args:
         psswd1 (str): The plain-text password to be hashed and stored.
         username (str): The username of the new user.
+        email (str): The email of the new user.
+        phone (str): The phone number of the new user.
 
     Returns:
-        bool: True if the user is successfully added, False if the username already exists or
-        if there is an error during the operation.
+        int or None: The ID of the newly added user if successful, or None if the username 
+                     already exists or if there is an error during the operation.
 
     Raises:
-        Exception: If there is an error during the user addition process.
+        Exception: If there is an error during the user creation process.
     """
     if check_user_in_db(username):
         print("Username already exists!")
-        return False
+        return None
     try:
         hash_value = generate_password_hash(psswd1)
         sql = text(
-            "INSERT INTO users (username, password) VALUES (:username, :password)")
-        db.session.execute(sql, {"username": username, "password": hash_value})
+            "INSERT INTO users (username, password) VALUES (:username, :password) RETURNING id")
+        result = db.session.execute(
+            sql, {"username": username, "password": hash_value})
+
+        new_user_id = result.fetchone()[0]  # Fetch the returned user ID
+
+        sql_profile = text(
+            "INSERT INTO user_profiles (user_id, email, phone) VALUES (:user_id, :email, :phone)")
+        db.session.execute(
+            sql_profile, {"user_id": new_user_id, "email": email, "phone": phone})
+
         db.session.commit()
-        return True
+        return new_user_id
     except Exception as e:
         print(f"Error adding new user: {e}")
         db.session.rollback()
-        return False
+        return None

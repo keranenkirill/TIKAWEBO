@@ -13,7 +13,12 @@ MAX_CONTENT_LENGTH = 2 * 1024 * 1024  # 2 MB limit for file uploads
 def allowed_file(filename):
     """
     Checks if the provided file has an allowed extension (png, jpg, jpeg).
-    Returns True if the file extension is allowed, otherwise False.
+
+    Args:
+        filename (str): The name of the file to be checked.
+
+    Returns:
+        bool: True if the file extension is allowed, False otherwise.
     """
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -21,17 +26,24 @@ def allowed_file(filename):
 def init_property_routes(app):
     """
     Initializes all property-related routes for the Flask application.
-    Handles property creation, bookings, property details, and deletion of bookings.
-    """
 
+    Args:
+        app (Flask): The Flask application instance.
+
+    Sets up routes to handle property creation, bookings, property details, and deletion of bookings.
+    """
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 
     @app.route("/newlisting")
     def newlisting():
         """
-        Route to display the form for creating a new property listing.
-        Ensures that the user is logged in; otherwise, redirects to the login page.
+        Displays the form for creating a new property listing.
+
+        Returns:
+            Response: The rendered 'newlisting.html' template.
+
+        Redirects to the login page if the user is not logged in.
         """
         if 'user_id' not in session:
             return redirect("/loginview")
@@ -40,9 +52,15 @@ def init_property_routes(app):
     @app.route("/createlisting", methods=["POST"])
     def createlisting():
         """
-        Route to handle the form submission for creating a new property listing.
-        Validates the uploaded image and other details, then adds the new property
-        to the database. If any validation fails, an error message is displayed.
+        Handles the form submission for creating a new property listing.
+
+        Validates the uploaded image and other details, then adds the new property to the database.
+
+        Returns:
+            Response: The home page or the 'newlisting.html' template if there's an error.
+
+        Redirects to the login page if the user is not logged in.
+        Displays an error message if any validation fails.
         """
         if 'user_id' not in session:
             return redirect("/loginview")
@@ -80,7 +98,11 @@ def init_property_routes(app):
     @app.route("/bookings")
     def view_bookings():
         """
-        Route to display all the bookings made by the logged-in user.
+        Displays all the bookings made by the logged-in user.
+
+        Returns:
+            Response: The rendered 'profileview.html' template with booking details.
+
         Redirects to the login page if the user is not logged in.
         """
         if 'user_id' not in session:
@@ -94,9 +116,18 @@ def init_property_routes(app):
     @app.route("/book_property/<int:property_id>", methods=["POST"])
     def book_property(property_id):
         """
-        Route to handle property booking.
+        Handles property booking by a user.
+
+        Args:
+            property_id (int): The ID of the property to be booked.
+
         Validates the booking dates and stores the booking in the database.
-        If the user is not logged in, they are redirected to the login page.
+
+        Returns:
+            Response: Redirects to the bookings page if successful or the property page in case of errors.
+
+        Redirects to the login page if the user is not logged in.
+        Displays error messages for invalid date formats or ranges.
         """
         if 'user_id' not in session:
             return redirect("/loginview")
@@ -129,8 +160,14 @@ def init_property_routes(app):
     @app.route("/property/<int:property_id>")
     def view_property(property_id):
         """
-        Route to display the details of a specific property.
-        Fetches the property details from the database and renders the booking view.
+        Displays the details of a specific property.
+
+        Args:
+            property_id (int): The ID of the property to be viewed.
+
+        Returns:
+            Response: The rendered 'bookingview.html' template with property details.
+
         If the property is not found, an error page is displayed.
         """
         property = properties.get_property_by_id(property_id)
@@ -144,20 +181,47 @@ def init_property_routes(app):
     @app.route('/delete_booking/<int:booking_id>', methods=['POST'])
     def delete_booking(booking_id):
         """
-        Route to handle the deletion of a booking by the logged-in user.
-        Calls the `delete_booking` function from `properties.py` to remove the booking from the database.
-        If successful, the user is redirected back to their profile view with a success message.
+        Handles the deletion of a booking by the logged-in user.
+
+        Args:
+            booking_id (int): The ID of the booking to be deleted.
+
+        Returns:
+            Response: Redirects to the profile view with success or failure messages.
         """
         if 'user_id' not in session:
             return redirect('/loginview')
 
         user_id = session['user_id']
-
         result = properties.delete_booking(booking_id, user_id)
 
         if result:
             flash('Booking deleted successfully!', 'success')
         else:
             flash('Failed to delete booking.', 'error')
+
+        return redirect('/profileview')
+
+    @app.route('/delete_property/<int:property_id>', methods=['POST'])
+    def delete_property(property_id):
+        """
+        Handles the deletion of a property listing by the logged-in user.
+
+        Args:
+            property_id (int): The ID of the property to be deleted.
+
+        Returns:
+            Response: Redirects to the home page with success or failure messages.
+        """
+        if 'user_id' not in session:
+            return redirect('/loginview')
+
+        user_id = session['user_id']
+        result = properties.delete_property(property_id, user_id)
+
+        if result:
+            flash('Property deleted successfully!', 'success')
+        else:
+            flash('Failed to delete property.', 'error')
 
         return redirect('/profileview')

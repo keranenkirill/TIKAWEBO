@@ -6,7 +6,7 @@ def add_property(title, price, description, image_url, user_id):
     """
     Adds a new property to the database.
 
-    Parameters:
+    Args:
         title (str): The title of the property.
         price (float): The price of the property.
         description (str): A description of the property.
@@ -38,11 +38,11 @@ def get_property_by_id(property_id):
     """
     Retrieves a property by its ID.
 
-    Parameters:
+    Args:
         property_id (int): The ID of the property.
 
     Returns:
-        result (dict or None): The property record if found, or None if not found.
+        dict or None: The property record if found, or None if not found.
 
     Raises:
         Exception: If there is an error fetching the property.
@@ -79,7 +79,7 @@ def get_properties_by_user(user_id):
     """
     Retrieves all properties listed by a specific user.
 
-    Parameters:
+    Args:
         user_id (int): The ID of the user.
 
     Returns:
@@ -96,23 +96,37 @@ def get_properties_by_user(user_id):
         print(f"Error fetching properties by user: {e}")
         return []
 
-# Fetch listed properties by the user
-
 
 def get_user_listed_properties(user_id):
+    """
+    Fetches all properties listed by a specific user.
+
+    Args:
+        user_id (int): The ID of the user.
+
+    Returns:
+        list: A list of properties listed by the user.
+    """
     query = text("""
-    SELECT title, price, description, image_url
+    SELECT id, title, price, description, image_url
     FROM properties
     WHERE user_id = :user_id;
     """)
     result = db.session.execute(query, {'user_id': user_id}).fetchall()
-    print(result)
+    print("USER LISTED PROPERTIES:", result)
     return result
-
-# Fetch rented properties by the user
 
 
 def get_user_rented_properties(user_id):
+    """
+    Fetches all properties rented by a specific user.
+
+    Args:
+        user_id (int): The ID of the user.
+
+    Returns:
+        list: A list of rented properties with booking details.
+    """
     sql = text("""
     SELECT properties.title, properties.price, properties.description, properties.image_url, 
            bookings.start_date, bookings.end_date, bookings.id AS booking_id
@@ -127,11 +141,11 @@ def get_rented_properties(user_id):
     """
     Retrieves all properties rented by a specific user.
 
-    Parameters:
+    Args:
         user_id (int): The ID of the user.
 
     Returns:
-        list: A list of rented properties including booking details (start date, end date).
+        list: A list of rented properties including booking details.
     """
     sql = text("""
         SELECT p.title, p.price, p.description, p.image_url, b.id as booking_id, b.start_date, b.end_date
@@ -147,7 +161,7 @@ def delete_booking(booking_id, user_id):
     """
     Deletes a booking made by a user.
 
-    Parameters:
+    Args:
         booking_id (int): The ID of the booking to be deleted.
         user_id (int): The ID of the user who made the booking.
 
@@ -172,11 +186,40 @@ def delete_booking(booking_id, user_id):
         return False
 
 
+def delete_property(property_id, user_id):
+    """
+    Deletes a property listed by a user.
+
+    Args:
+        property_id (int): The ID of the property to be deleted.
+        user_id (int): The ID of the user who listed the property.
+
+    Returns:
+        bool: True if the property was successfully deleted, False otherwise.
+
+    Raises:
+        Exception: If there is an error deleting the property.
+    """
+    try:
+        sql = text("""
+            DELETE FROM properties
+            WHERE id = :property_id AND user_id = :user_id
+        """)
+        db.session.execute(
+            sql, {'property_id': property_id, 'user_id': user_id})
+        db.session.commit()
+        return True
+    except Exception as e:
+        print(f"Error deleting property: {e}")
+        db.session.rollback()
+        return False
+
+
 def book_property(user_id, property_id, start_date, end_date):
     """
     Creates a booking for a property by a user.
 
-    Parameters:
+    Args:
         user_id (int): The ID of the user making the booking.
         property_id (int): The ID of the property to be booked.
         start_date (datetime): The start date of the booking.
@@ -206,7 +249,7 @@ def get_user_bookings(user_id):
     """
     Retrieves all bookings made by a specific user.
 
-    Parameters:
+    Args:
         user_id (int): The ID of the user.
 
     Returns:
