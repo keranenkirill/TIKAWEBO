@@ -1,16 +1,17 @@
-# Asennusohje - Rent&Stay
+# Asennusohje - Rent&Stay 🛠️
 
-(Tässä asennusohjeessa ei huomioida projektin asennusta Windows-koneelle)
+*(Tässä asennusohjeessa ei huomioida projektin asennusta Windows-koneelle)*
 
-#### Tämä asennusohje toimii ongelmitta, mikäli ET ole asentanut PostgreSQL:ää kurssin asennusskritptillä, vaan PostgreSQL:n omilta sivuilta
+#### Tämä asennusohje toimii ongelmitta, mikäli **ET** ole asentanut PostgreSQL:ää kurssin asennusskriptillä, vaan PostgreSQL:n omilta sivuilta.
 
-1. Lataa projekti GitHubista
+---
+1. Lataa projekti GitHubista 📥
 
    ```bash
    git clone https://github.com/keranenkirill/TIKAWEBO.git
    ```
 
-2. Virtuaaliympäristön luominen ja aktivoiminen:
+2. Virtuaaliympäristön luominen ja aktivoiminen 🔧
    Virtuaaliympäristö auttaa hallitsemaan projektisi riippuvuuksia ja estämään ristiriitoja muiden projektien kanssa.
 
    mene siis projektin kotihakemistoon, jonka tulisi näyttää tältä:
@@ -31,13 +32,13 @@
    source venv/bin/activate
    ```
 
-4. Riippuvuuksien asentaminen:
+4. Riippuvuuksien asentaminen 📦:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-5. Ympäristömuuttujien asettaminen (.env-tiedosto):
+5. Ympäristömuuttujien asettaminen (.env-tiedosto)🌍:
 
    ```bash
    touch .env
@@ -59,7 +60,7 @@
    secrets.token_hex(16)
    ```
 
-7. Web-sovelluksen käynnistäminen:
+7. Web-sovelluksen käynnistäminen 🚀:
 
    Postgresql:ssä on suositeltaaa jokaiselle projektille luoda oma tietokanta-käyttäjä.
    Tämä hoituu terminaalissa komennolla:
@@ -85,7 +86,7 @@
 
    ```
 
-   ja käynnistetään projekti
+   ja käynnistetään projekti 🖥️
 
    ```bash
    flask run
