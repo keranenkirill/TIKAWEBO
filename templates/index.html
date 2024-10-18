@@ -13,7 +13,7 @@
         {{ display_message(get_flashed_messages(with_categories=True)) }}
 
         {% if session.username %}
-        <p class="welcome-msg">Welcome, <strong>{{ session.username }}</strong>!</p>
+        <p class="logged_usrnm">@{{ session.username }}</p>
         <a href="/logout" class="btn">Logout</a>
         <a href="/profileview" class="btn">Profile</a>
         <form action="/newlisting" method="get">

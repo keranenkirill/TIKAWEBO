@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Property</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
+
     <div class="container">
         <h1>Book Property: {{ property.title }}</h1>
-
         {% from "messages.html" import display_message %}
         {{ display_message(get_flashed_messages(with_categories=True)) }}
+        {% if session.username %}
+        <p class="logged_usrnm">@{{ session.username }}</p>
+        {% endif %}
 
         <div class="property-details">
             <img src="{{ url_for('static', filename='images/' ~ property.image_url) }}" alt="{{ property.title }}" style="width:100%; height:300px;">
             <p><strong>Price:</strong> ${{ property.price }}</p>
             <p><strong>Description:</strong> {{ property.description }}</p>
+            <p class="owner_usrnm">listed by owner....</p>
         </div>
 
+        <!-- Booking Form -->
         {% if session.username %}
         <form action="/book_property/{{ property.id }}" method="POST" class="form">
             <div class="form-group">
@@ -34,8 +41,43 @@
             <button type="submit" class="btn">Book Now</button>
         </form>
 
+        <!-- Toggle Reviews Button -->
+        <button id="show-reviews" class="btn active">Show Reviews</button>
+        <!-- Toggle Add Review Button -->
+        <button id="show-add_review" class="btn">Add Review</button>
+        
+
+        <!-- Add Review Form (Initially hidden) -->
+        <section id="add-review-section" class="review-section" style="display: none;">
+            <h2>Add a Review</h2>
+            <form action="/add_review/{{ property.id }}" method="POST" class="form">
+                <div class="form-group">
+                    <textarea name="review" id="review" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Review</button>
+            </form>
+        </section>
+
+        
+
+        <!-- Reviews Section (Initially hidden) -->
+        <section id="reviews-section" class="review-section" style="display: none;">
+            <h2>Reviews</h2>
+            <div class="reviews">
+                {% if reviews %}
+                    <ul>
+                        {% for review in reviews %}
+                            <p>@{{ review.username }}: {{ review.review }}</p>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No reviews yet. Be the first to review this property!</p>
+                {% endif %}
+            </div>
+        </section>
+
         {% else %}
-        <p class="error-message">You need to <a href="/loginview">log in</a> to book this property.</p>
+        <p class="error-message">You need to <a href="/loginview">log in</a> to book this property or add a review.</p>
         {% endif %}
 
         <form action="/" method="get">
@@ -45,6 +87,34 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const addReviewSection = document.getElementById('add-review-section');
+            const showAddReviewButton = document.getElementById('show-add_review');
+            const reviewsSection = document.getElementById('reviews-section');
+            const showReviewsButton = document.getElementById('show-reviews');
+
+            // Toggle Add Review Form
+            showAddReviewButton.addEventListener('click', function() {
+                if (addReviewSection.style.display === 'none') {
+                    addReviewSection.style.display = 'block';
+                    showAddReviewButton.classList.add('active');
+                } else {
+                    addReviewSection.style.display = 'none';
+                    showAddReviewButton.classList.remove('active');
+                }
+            });
+
+            // Toggle Reviews Section
+            showReviewsButton.addEventListener('click', function() {
+                if (reviewsSection.style.display === 'none') {
+                    reviewsSection.style.display = 'block';
+                    showReviewsButton.classList.add('active');
+                } else {
+                    reviewsSection.style.display = 'none';
+                    showReviewsButton.classList.remove('active');
+                }
+            });
+
+            // Flash message auto-hide
             const flashMessages = document.querySelectorAll('.flash-message');
             flashMessages.forEach(function(message) {
                 setTimeout(function() {
@@ -54,4 +124,5 @@
         });
     </script>
 </body>
+
 </html>

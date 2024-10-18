@@ -41,7 +41,7 @@ h2 {
    gap: 30px;  /* Increased gap between properties */
 }
 
-.property, .profile-edit {
+.property, .profile-edit, .review-section {
    background-color: #f9f9f9;
    padding: 20px;
    border-radius: 10px;
@@ -135,4 +135,40 @@ p.info {
    border-radius: 5px;
    margin-bottom: 20px;
    text-align: center;
+}
+
+/* Enhanced Text Fields */
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="tel"], 
+input[type="date"], 
+textarea {
+    width: 50%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus, 
+input[type="tel"]:focus, 
+input[type="date"]:focus, 
+textarea:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Textarea specific */
+textarea {
+    resize: vertical;
+    min-height: 150px;
 }

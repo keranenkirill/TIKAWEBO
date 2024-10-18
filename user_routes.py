@@ -4,6 +4,8 @@ from functools import wraps
 import users
 import logging
 import properties
+import reviews
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -87,6 +89,7 @@ def init_user_routes(app):
         rented_properties = properties.get_rented_properties(
             user_id)  # Fetch rented properties
         listed_properties = properties.get_user_listed_properties(user_id)
+
         return render_template("profileview.html", userprofile=userprofile, rented_properties=rented_properties, listed_properties=listed_properties)
 
     @app.route("/login", methods=["POST"])
@@ -207,3 +210,30 @@ def init_user_routes(app):
         session.clear()  # Clear the entire session on logout
         flash("Logged out successfully", "success")
         return redirect("/")
+
+    @app.route("/add_review/<int:property_id>", methods=["POST"])
+    @login_required
+    def add_review(property_id):
+        """
+        Route to handle adding a review for a specific property.
+
+        Args:import logging import properties
+            property_id (int): The ID of the property being reviewed.
+
+        Returns:
+            Redirects to the property page after adding the review.
+        """
+        user_id = session['user_id']
+        review_text = request.form.get("review")
+
+        if not review_text:
+            flash("Review cannot be empty", "error")
+            return redirect(f"/property/{property_id}")
+        result = reviews.add_review(user_id, property_id, review_text)
+
+        if result:
+            flash("Review added successfully!", "success")
+        else:
+            flash("Error adding review", "error")
+
+        return redirect(f"/property/{property_id}")

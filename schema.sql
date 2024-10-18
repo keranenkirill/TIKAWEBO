@@ -40,6 +40,7 @@ CREATE TABLE if not exists reviews (
     CONSTRAINT fk_property_review FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE CASCADE
 );
 
+-- Indexes
 CREATE INDEX idx_user_id ON users (id);
 CREATE INDEX idx_properties_user_id ON properties(user_id);
 CREATE INDEX idx_bookings_property_id ON bookings(property_id);

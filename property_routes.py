@@ -3,6 +3,7 @@ import os
 from werkzeug.utils import secure_filename
 import properties
 from datetime import datetime
+import reviews
 
 # Assuming you have a folder for uploaded images
 UPLOAD_FOLDER = 'static/images/'
@@ -174,9 +175,11 @@ def init_property_routes(app):
         if not property:
             return render_template("error.html", error="Property not found")
 
+        reviews_list = reviews.get_reviews_by_property(property_id)
+        print(reviews_list)
         # URL to access the image file from the static folder
         image_url = url_for('static', filename=f'images/{property.image_url}')
-        return render_template("bookingview.html", property=property, image_url=image_url)
+        return render_template("bookingview.html", property=property, image_url=image_url, reviews=reviews_list)
 
     @app.route('/delete_booking/<int:booking_id>', methods=['POST'])
     def delete_booking(booking_id):
