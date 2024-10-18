@@ -1,39 +1,48 @@
-# Rent&Stay - web sovellus
+# Rent&Stay - Web-sovellus 🏠
 
-[**ASENNUSOHJE & KÄYTTÖOHJE**](DOKUMENTAATIO/asennusohje.md)
-<br>
-<br>
+[**Asennusohje & Käyttöohje**](DOKUMENTAATIO/asennusohje.md)  
+📊 [_Kirjanpito & työtila_](https://trello.com/invite/b/66dd979b69f8fe952329e9df/ATTIdecd3e46f5556f7fad0b770e17d14b7f159592A9/tikawebo)  
+🤖 [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](DOKUMENTAATIO/chatgpt_selvitys.md)
 
-- [_kirjanpito & työtila_](https://trello.com/invite/b/66dd979b69f8fe952329e9df/ATTIdecd3e46f5556f7fad0b770e17d14b7f159592A9/tikawebo)
-- [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](DOKUMENTAATIO/chatgpt_selvitys.md)
+---
 
-## Sovelluksen tarkoitus
-
+## Sovelluksen tarkoitus 🎯
 Rent&Stay on verkkosovellus, jonka avulla käyttäjät voivat kirjautua sisään, listata vuokrattavia asuntoja ja varata asuntoja. Sovellus tukee myös kirjautuneiden käyttäjien tietojen hallintaa ja listattujen kohteiden näyttämistä.
 
-### Toiminallisuus
+---
 
-Käyttäjät voivat rekisteröityä, kirjautua sisään ja ulos, hallita varauksiaan (lisääminen/poistaminen), sekä lisätä vuokrattavia kohteita. Kirjautumisen yhteydessä käytetään salasanojen hajauttamista.
+## Toiminnallisuus ⚙️
 
-### Tietokanta
+- ✅ Rekisteröityminen ja kirjautuminen
+- 📝 Varausten hallinta (lisääminen / poistaminen)
+- 🏘️ Kohteiden lisääminen ja hallinta
+- 🔐 Salasanojen turvallinen hajauttaminen
 
-Sovellus käyttää PostgreSQL-tietokantaa. Seuraavat taulut löytyvät:
+---
 
-- users: Käyttäjien tiedot (id, username, password).
-- properties: Vuokrattavat asunnot (id, title, price, description, image_url, user_id).
-- bookings: Varaukset (id, property_id, user_id, start_date, end_date).
+## Tietokanta 📊
 
-Käyttäjän lisäämät kuvat tallennetaan static/images/-kansioon ja liitetään kohteen tietoihin tietokannan kautta. Kuvien maksimikoko on 2 MB
+Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
 
-### Tuotannon kehitysideoita/ -taskeja
+| Taulu         | Kuvaus                                          |
+| ------------- | ----------------------------------------------- |
+| **users**     | Käyttäjien tiedot (id, username, password)       |
+| **profiles**  | Käyttäjäprofiilit (id, user_id, email, phone)    |
+| **properties**| Vuokrattavat asunnot (id, title, price, etc.)    |
+| **bookings**  | Varaukset (id, property_id, user_id, dates)      |
+| **reviews**   | Arvostelut (id, user_id, property_id, review)    |
 
-#### kehityksessä:
+---
 
-- tietokanta-taulujen laajentaminen
-- käyttäjän palveluun luotujen vuokrakohteiden poistaminen (toistaiseksi vain lisäys toimii)
-- esimerkkikuvie muokkaus samankokoisiksi
+## Tuotannon kehitysideoita 💡
 
-#### kehitysideoita
+### Kehityksessä 🚧
 
-- tykkäykset
-- kommenttien luominen
+- [ ] Tietokanta-taulujen laajentaminen
+- [ ] Käyttäjän luomien kohteiden poistaminen
+- [ ] Kuvien yhtenäistäminen
+
+### Kehitysideoita ✨
+
+- 👍 Tykkäykset
+- 💬 Kommenttien luominen
