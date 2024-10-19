@@ -39,6 +39,7 @@
             <section id="edit-profile" class="profile-edit" style="display: none;">
                 <h3>Edit Profile</h3>
                 <form action="/edit_profile" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div>
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" value="{{ userprofile.email }}" required>
@@ -69,6 +70,7 @@
                                 <p><strong>Booking Dates:</strong> {{ property.start_date }} to {{ property.end_date }}</p>
                             </div>
                             <form action="/delete_booking/{{ property.booking_id }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="btn btn-danger">Delete Booking</button>
                             </form>
                         </article>
@@ -91,6 +93,7 @@
                                 <p>{{ property.description }}</p>
                             </div>
                             <form action="/delete_property/{{ property.id }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="btn btn-danger">Delete Property</button>
                             </form>
                         </article>

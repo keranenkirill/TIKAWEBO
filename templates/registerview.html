@@ -14,9 +14,14 @@
 
         {% if session.username %}
         <p class="welcome-msg">logged in as<strong>{{ session.username }}</strong></p>
-        <a href="/logout" class="btn">log out</a>
         {% else %}
+        <div class="back-home">
+            <form action="/" method="get">
+                <button type="submit" class="btn">Main</button>
+            </form>
+        </div>
         <form action="/createuser" method="POST" class="form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="username">username:</label>
                 <input type="text" name="username" id="username" required aria-label="Username">

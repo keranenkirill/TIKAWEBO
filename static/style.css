@@ -60,6 +60,10 @@ h2 {
 }
 
 /* Property Image */
+img {
+   border-radius: 5px;
+   margin-top: 10px;
+ }
 .property img {
    width: 100%;
    height: auto;
@@ -87,6 +91,43 @@ h2 {
 .btn:hover {
    background-color: #0056b3;
 }
+
+.logout_btn  {
+   padding: 10px 15px;
+   background-color: #ff0000;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   text-align: center;
+   text-decoration: none;  /* Ensure buttons are links */
+   display: inline-block;
+   margin-top: 10px;
+}
+
+.logout_btn:hover {
+   background-color: #b30000;
+}
+
+.register_btn  {
+   padding: 10px 15px;
+   background-color: #a0a0a0;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   text-align: center;
+   text-decoration: none;  /* Ensure buttons are links */
+   display: inline-block;
+   margin-top: 10px;
+}
+
+.register_btn:hover {
+   background-color: #555555;
+}
+
+
+
 
 /* Welcome Message */
 .welcome-msg {

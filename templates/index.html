@@ -14,7 +14,7 @@
 
         {% if session.username %}
         <p class="logged_usrnm">@{{ session.username }}</p>
-        <a href="/logout" class="btn">Logout</a>
+        <a href="/logout" class="logout_btn">Logout</a>
         <a href="/profileview" class="btn">Profile</a>
         <form action="/newlisting" method="get">
             <button type="submit" class="btn">List for Rent New House</button>

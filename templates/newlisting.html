@@ -14,8 +14,9 @@
         {{ display_message(get_flashed_messages(with_categories=True)) }}
 
         {% if session.username %}
-        <p class="welcome-msg"><strong>{{ session.username }}</strong></p>
+        <p class="welcome-msg">2{{ session.username }}</p>
         <form action="/createlisting" method="POST" enctype="multipart/form-data" class="form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="title">Property Title:</label>
                 <input type="text" name="title" id="title" required>

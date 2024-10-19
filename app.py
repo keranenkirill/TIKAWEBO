@@ -3,6 +3,8 @@ from db import init_db
 from user_routes import init_user_routes
 from property_routes import init_property_routes
 from os import getenv
+from flask_wtf.csrf import CSRFProtect
+
 
 """
 This module sets up and runs the Flask application.
@@ -25,6 +27,7 @@ Attributes:
 
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
+csrf = CSRFProtect(app)
 
 init_db(app)
 

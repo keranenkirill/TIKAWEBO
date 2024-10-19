@@ -102,6 +102,7 @@ def init_user_routes(app):
         Returns:
             Response: Redirects to the home page on success or back to the login page on failure.
         """
+
         username = request.form["username"]
         password = request.form["password"]
 

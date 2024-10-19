@@ -20,6 +20,16 @@ Rent&Stay on verkkosovellus, jonka avulla käyttäjät voivat kirjautua sisään
 
 ---
 
+## Tietoturva 🛡️
+
+Sovelluksessa on huomioitu seuraavat tietoturva-asiat:
+
+- **XSS (Cross-Site Scripting)**: Kaikki käyttäjän syötteet validoidaan ja estetään haitallisen koodin injektointi.
+- **CSRF (Cross-Site Request Forgery)**: Käytössä on CSRF-suojaus, joka estää luvattomien pyyntöjen suorittamisen toisen käyttäjän istunnon nimissä.
+- **SQL-injektio**: Kaikki tietokantakyselyt on toteutettu parametrisoituna estääkseen SQL-injektiot.
+
+---
+
 ## Tietokanta 📊
 
 Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
@@ -42,9 +52,9 @@ Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
 - mikäli listatulla kohteella on varauksia, varmennus kohteen poistamisesta ja siihen liittyvien varauksien poistaisesta
 - vuokrausnäkymässä olemassa olevien bookattujen aikojen näyttäminen
 - kokemus-kommentin poistaminen
+
 ### Kehitysideoita ✨
 
 - 👍 Tykkäykset
 - listaaminen suosion perusteella
 - keskiarvon antaminen kohteille
-- 

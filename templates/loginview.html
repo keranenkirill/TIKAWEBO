@@ -17,6 +17,7 @@
         <a href="/logout" class="btn">Log out</a>
         {% else %}
         <form action="/login" method="POST" class="form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="username">username:</label>
                 <input type="text" name="username" id="username" required aria-label="Username">
@@ -27,7 +28,7 @@
             </div>
             <button type="submit" class="btn">login</button>
         </form>
-        <a href="/registerview" class="link">register</a>
+        <a href="/registerview" class="register_btn">register</a>
         {% endif %}
     </div>
 
