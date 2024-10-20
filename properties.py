@@ -186,6 +186,33 @@ def delete_booking(booking_id, user_id):
         return False
 
 
+def get_bookings_by_property_id(property_id):
+    """
+    Retrieves all bookings for a specific property.
+
+    Args:
+        property_id (int): The ID of the property.
+
+    Returns:
+        list: A list of bookings for the property, including booking details.
+
+    Raises:
+        Exception: If there is an error fetching the bookings.
+    """
+    try:
+        sql = text("""
+            SELECT  b.user_id, u.username, b.start_date, b.end_date
+            FROM bookings b
+            JOIN users u ON b.user_id = u.id
+            WHERE b.property_id = :property_id
+        """)
+        result = db.session.execute(sql, {"property_id": property_id})
+        return result.fetchall()
+    except Exception as e:
+        print(f"Error fetching bookings by property ID: {e}")
+        return []
+
+
 def delete_property(property_id, user_id):
     """
     Deletes a property listed by a user.

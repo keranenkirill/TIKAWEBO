@@ -1,4 +1,4 @@
-from werkzeug.security import generate_password_hash
+from sqlalchemy import text
 from sqlalchemy.sql import text
 from db import db
 
@@ -90,7 +90,6 @@ def update_user_profile(user_id, email, phone, password):
         Exception: If there is an error during the profile update.
     """
     try:
-        hash_value = generate_password_hash(password)
         sql = text(
             "UPDATE user_profiles SET email=:email, phone=:phone WHERE user_id=:user_id")
         db.session.execute(
@@ -99,7 +98,7 @@ def update_user_profile(user_id, email, phone, password):
         sql_password = text(
             "UPDATE users SET password=:password WHERE id=:user_id")
         db.session.execute(
-            sql_password, {"password": hash_value, "user_id": user_id})
+            sql_password, {"password": password, "user_id": user_id})
 
         db.session.commit()
         return True
@@ -131,11 +130,10 @@ def add_new_user(psswd1, username, email, phone):
         print("Username already exists!")
         return None
     try:
-        hash_value = generate_password_hash(psswd1)
         sql = text(
             "INSERT INTO users (username, password) VALUES (:username, :password) RETURNING id")
         result = db.session.execute(
-            sql, {"username": username, "password": hash_value})
+            sql, {"username": username, "password": psswd1})
 
         new_user_id = result.fetchone()[0]  # Fetch the returned user ID
 
@@ -148,5 +146,31 @@ def add_new_user(psswd1, username, email, phone):
         return new_user_id
     except Exception as e:
         print(f"Error adding new user: {e}")
+        db.session.rollback()
+        return None
+
+
+def delete_user_related_data(user_id):
+    try:
+        sql = text("""
+            DELETE FROM reviews
+            WHERE property_id IN (SELECT id FROM properties WHERE user_id=:user_id)
+        """)
+        db.session.execute(sql, {"user_id": user_id})
+
+        sql = text("DELETE FROM user_profiles WHERE user_id=:user_id")
+        db.session.execute(sql, {"user_id": user_id})
+
+        sql = text("DELETE FROM properties WHERE user_id=:user_id")
+        db.session.execute(sql, {"user_id": user_id})
+
+        sql = text("DELETE FROM users WHERE id=:user_id")
+        db.session.execute(sql, {"user_id": user_id})
+
+        db.session.commit()
+        return True
+
+    except Exception as e:
+        print(f"Error deleting user data: {e}")
         db.session.rollback()
         return None

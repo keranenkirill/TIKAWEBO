@@ -14,7 +14,7 @@ body {
 
 /* Container */
 .container {
-   max-width: 800px;  /* Increased max-width for better display of multiple items */
+   max-width: 800px;
    margin: 50px auto;
    padding: 20px;
    background-color: #fff;
@@ -38,39 +38,29 @@ h2 {
 .property-list {
    display: flex;
    flex-direction: column;
-   gap: 30px;  /* Increased gap between properties */
+   gap: 30px;
 }
 
-.property, .profile-edit, .review-section {
+.property, .profile-edit, .review-section, .bookings-section{
    background-color: #f9f9f9;
    padding: 20px;
    border-radius: 10px;
    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Property Title */
-.property h3 {
-   margin-bottom: 10px;
-}
-
-/* Property Price */
-.property p {
-   margin-bottom: 10px;
-   font-weight: bold;
-}
-
 /* Property Image */
 img {
    border-radius: 5px;
    margin-top: 10px;
- }
+}
+
 .property img {
    width: 100%;
    height: auto;
    margin-bottom: 10px;
    border-radius: 5px;
    object-fit: cover;
-   max-height: 300px;  /* Limits image height for consistency */
+   max-height: 300px;
 }
 
 /* Buttons */
@@ -82,17 +72,17 @@ img {
    border-radius: 5px;
    cursor: pointer;
    text-align: center;
-   text-decoration: none;  /* Ensure buttons are links */
    display: inline-block;
    margin-top: 10px;
 }
 
-/* Enhanced hover contrast */
+/* Hover effect */
 .btn:hover {
    background-color: #0056b3;
 }
 
-.logout_btn  {
+/* Delete button */
+.delete_btn {
    padding: 10px 15px;
    background-color: #ff0000;
    color: #fff;
@@ -100,7 +90,47 @@ img {
    border-radius: 5px;
    cursor: pointer;
    text-align: center;
-   text-decoration: none;  /* Ensure buttons are links */
+   display: inline-block;
+   position: relative;
+}
+
+.delete_btn:hover {
+   background-color: #b30000;
+}
+
+/* Tooltip styling */
+.delete_btn .tooltip-text {
+   visibility: hidden;
+   width: 200px;
+   background-color: black;
+   color: white;
+   text-align: center;
+   border-radius: 5px;
+   padding: 5px;
+   position: absolute;
+   z-index: 1;
+   bottom: 100%;
+   left: 50%;
+   margin-left: -100px;  /* Center the tooltip */
+   opacity: 0;
+   transition: opacity 0.3s ease;
+}
+
+/* Show tooltip when hovering over delete button */
+.delete_btn:hover .tooltip-text {
+   visibility: visible;
+   opacity: 1;
+}
+
+/* Logout button */
+.logout_btn {
+   padding: 10px 15px;
+   background-color: #ff0000;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   text-align: center;
    display: inline-block;
    margin-top: 10px;
 }
@@ -109,7 +139,8 @@ img {
    background-color: #b30000;
 }
 
-.register_btn  {
+/* Register button */
+.register_btn {
    padding: 10px 15px;
    background-color: #a0a0a0;
    color: #fff;
@@ -117,7 +148,6 @@ img {
    border-radius: 5px;
    cursor: pointer;
    text-align: center;
-   text-decoration: none;  /* Ensure buttons are links */
    display: inline-block;
    margin-top: 10px;
 }
@@ -126,24 +156,65 @@ img {
    background-color: #555555;
 }
 
-
-
-
-/* Welcome Message */
-.welcome-msg {
-   margin-bottom: 15px;
-   font-size: 18px;
+/* Text Fields */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 50%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Back to Home Button */
-form {
-   margin-top: 20px;
-   text-align: center;  /* Center the form elements */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
-/* Spacing between paragraphs */
-p {
-   margin-bottom: 15px;
+/* Textarea specific */
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Custom file input styling */
+.custom-file-upload {
+   display: inline-block;
+   padding: 10px 15px;
+   background-color: #007BFF;
+   color: white;
+   border-radius: 5px;
+   cursor: pointer;
+   text-align: center;
+   transition: background-color 0.3s ease;
+   margin-right: 10px;  /* Space between button and file name */
+}
+
+.custom-file-upload:hover {
+   background-color: #0056b3;
+}
+
+#file-name {
+   font-style: italic;
+   color: #666;
+}
+
+input[type="file"] {
+   display: none;  /* Hide the original file input */
 }
 
 /* Flash Messages */
@@ -165,51 +236,4 @@ p.error {
    border-radius: 5px;
    margin-bottom: 20px;
    text-align: center;
-}
-
-/* For general information messages (optional) */
-p.info {
-   color: #0c5460;
-   background-color: #d1ecf1;
-   border: 1px solid #bee5eb;
-   padding: 10px;
-   border-radius: 5px;
-   margin-bottom: 20px;
-   text-align: center;
-}
-
-/* Enhanced Text Fields */
-input[type="text"], 
-input[type="password"], 
-input[type="email"], 
-input[type="tel"], 
-input[type="date"], 
-textarea {
-    width: 50%;
-    padding: 12px 15px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 2px solid #007BFF;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-input[type="text"]:focus, 
-input[type="password"]:focus, 
-input[type="email"]:focus, 
-input[type="tel"]:focus, 
-input[type="date"]:focus, 
-textarea:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-}
-
-/* Textarea specific */
-textarea {
-    resize: vertical;
-    min-height: 150px;
 }

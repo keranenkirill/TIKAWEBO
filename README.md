@@ -13,7 +13,7 @@ Rent&Stay on verkkosovellus, jonka avulla käyttäjät voivat kirjautua sisään
 
 ## Toiminnallisuus ⚙️
 
-- ✅ Rekisteröityminen ja kirjautuminen
+- ✅ Rekisteröityminen, kirjautuminen ja tilin poistaminen
 - 📝 Varausten hallinta (lisääminen / poistaminen)
 - 🏘️ Kohteiden lisääminen ja hallinta
 - 🔐 Salasanojen turvallinen hajauttaminen
@@ -48,9 +48,7 @@ Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
 
 ### Kehityksessä 🚧
 
-- käyttäjätilin poistaminen
 - mikäli listatulla kohteella on varauksia, varmennus kohteen poistamisesta ja siihen liittyvien varauksien poistaisesta
-- vuokrausnäkymässä olemassa olevien bookattujen aikojen näyttäminen
 - kokemus-kommentin poistaminen
 
 ### Kehitysideoita ✨

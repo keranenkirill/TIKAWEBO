@@ -12,7 +12,6 @@
             <h1>User Profile</h1>
         </header>
 
-        <!-- Display Flash Messages -->
         {% from "messages.html" import display_message %}
         {{ display_message(get_flashed_messages(with_categories=True)) }}
 
@@ -28,14 +27,12 @@
             <p><strong>Email:</strong> {{ userprofile.email }}</p>
             <p><strong>Phone:</strong> {{ userprofile.phone }}</p>
 
-            <!-- Toggle buttons for profile editor, rented and listed properties -->
             <div class="button-group">
                 <button id="show-edit_profile" class="btn">Edit Profile</button>
                 <button id="show-rented" class="btn active">Rented</button>
                 <button id="show-listed" class="btn">Listed</button>
             </div>
 
-            <!-- Section for profile editor -->
             <section id="edit-profile" class="profile-edit" style="display: none;">
                 <h3>Edit Profile</h3>
                 <form action="/edit_profile" method="POST">
@@ -50,13 +47,25 @@
                     </div>
                     <div>
                         <label for="password">New Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter new password">
+                        <input type="password" id="password1" name="password" placeholder="Enter new password">
+                    </div>
+                    <div>
+                        <label for="password">Repeat Password:</label>
+                        <input type="password" id="password2" name="password2" placeholder="Enter new password">
                     </div>
                     <button type="submit" class="btn">Confirm Changes</button>
                 </form>
+                <div class="del_user">
+                    <form action="/delete_user" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="delete_btn">Delete user {{ session.username }} and all related data
+                            <span class="tooltip-text">Are you sure? This will delete listings, bookings and comments. Cant be undone!</span>
+                        </button>
+                    </form>
+                </div>
+                
             </section>
 
-            <!-- Section for rented properties -->
             <section id="rented-properties" class="property-list">
                 <h3>Your Rented Properties</h3>
                 {% if rented_properties %}
@@ -80,7 +89,6 @@
                 {% endif %}
             </section>
 
-            <!-- Section for listed properties -->
             <section id="listed-properties" class="property-list" style="display: none;">
                 <h3>Your Listed Properties</h3>
                 {% if listed_properties %}
@@ -104,7 +112,6 @@
             </section>
         </section>
 
-        <!-- Not logged in message -->
         {% else %}
         <section class="not-logged-in">
             <p>You are not logged in. Please <a href="/loginview">log in</a> to view your profile.</p>
@@ -122,12 +129,10 @@
             const showListedButton = document.getElementById('show-listed');
             const showEditProfileButton = document.getElementById('show-edit_profile');
 
-            // Set initial visibility
             rentedPropertiesSection.style.display = 'block';
             listedPropertiesSection.style.display = 'none';
             editProfileSection.style.display = 'none';
 
-            // Event listener for 'Edit Profile'
             showEditProfileButton.addEventListener('click', function() {
                 rentedPropertiesSection.style.display = 'none';
                 listedPropertiesSection.style.display = 'none';
@@ -137,7 +142,6 @@
                 showListedButton.classList.remove('active');
             });
 
-            // Event listener for 'Show Rented Properties'
             showRentedButton.addEventListener('click', function() {
                 rentedPropertiesSection.style.display = 'block';
                 listedPropertiesSection.style.display = 'none';
@@ -147,7 +151,6 @@
                 showEditProfileButton.classList.remove('active');
             });
 
-            // Event listener for 'Show Listed Properties'
             showListedButton.addEventListener('click', function() {
                 rentedPropertiesSection.style.display = 'none';
                 listedPropertiesSection.style.display = 'block';

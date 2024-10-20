@@ -29,9 +29,22 @@
             <p><strong>Price:</strong> ${{ property.price }}</p>
             <p><strong>Description:</strong> {{ property.description }}</p>
             <p class="owner_usrnm">listed by owner....</p>
+
+            <h3>Bookings for this Property:</h3>
+
+            
+            <section id="bookings_list_section" class="bookings-section" >
+                {% if bookings_list %}
+                {% for booking in bookings_list %}
+                    <p><strong>{{ booking.username }} | {{ booking.start_date }}  -  {{ booking.end_date }}</strong></p>
+                {% endfor %}
+                {% else %}
+                    <p>No bookings found for this property.</p>
+                {% endif %}
+            </section>
+                
         </div>
 
-        <!-- Booking Form -->
         {% if session.username %}
         <form action="/book_property/{{ property.id }}" method="POST" class="form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -48,13 +61,10 @@
             <button type="submit" class="btn">Book Now</button>
         </form>
 
-        <!-- Toggle Reviews Button -->
         <button id="show-reviews" class="btn active">Show Reviews</button>
-        <!-- Toggle Add Review Button -->
         <button id="show-add_review" class="btn">Add Review</button>
         
 
-        <!-- Add Review Form (Initially hidden) -->
         <section id="add-review-section" class="review-section" style="display: none;">
             <h2>Add a Review</h2>
             <form action="/add_review/{{ property.id }}" method="POST" class="form">
@@ -68,7 +78,6 @@
 
         
 
-        <!-- Reviews Section (Initially hidden) -->
         <section id="reviews-section" class="review-section" style="display: none;">
             <h2>Reviews</h2>
             <div class="reviews">
@@ -96,7 +105,6 @@
             const reviewsSection = document.getElementById('reviews-section');
             const showReviewsButton = document.getElementById('show-reviews');
 
-            // Toggle Add Review Form
             showAddReviewButton.addEventListener('click', function() {
                 if (addReviewSection.style.display === 'none') {
                     addReviewSection.style.display = 'block';
@@ -107,7 +115,6 @@
                 }
             });
 
-            // Toggle Reviews Section
             showReviewsButton.addEventListener('click', function() {
                 if (reviewsSection.style.display === 'none') {
                     reviewsSection.style.display = 'block';
@@ -118,7 +125,6 @@
                 }
             });
 
-            // Flash message auto-hide
             const flashMessages = document.querySelectorAll('.flash-message');
             flashMessages.forEach(function(message) {
                 setTimeout(function() {

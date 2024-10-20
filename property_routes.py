@@ -137,7 +137,6 @@ def init_property_routes(app):
         start_date = request.form["start_date"]
         end_date = request.form["end_date"]
 
-        # Validate the dates
         try:
             start_date = datetime.strptime(start_date, '%Y-%m-%d')
             end_date = datetime.strptime(end_date, '%Y-%m-%d')
@@ -148,7 +147,6 @@ def init_property_routes(app):
             flash("Invalid date format", "error")
             return redirect(f"/property/{property_id}")
 
-        # Use properties.py to book the property
         try:
             properties.book_property(
                 user_id, property_id, start_date, end_date)
@@ -176,10 +174,11 @@ def init_property_routes(app):
             return render_template("error.html", error="Property not found")
 
         reviews_list = reviews.get_reviews_by_property(property_id)
-        print(reviews_list)
-        # URL to access the image file from the static folder
+
+        bookings_list = properties.get_bookings_by_property_id(property_id)
+        print(bookings_list)
         image_url = url_for('static', filename=f'images/{property.image_url}')
-        return render_template("bookingview.html", property=property, image_url=image_url, reviews=reviews_list)
+        return render_template("bookingview.html", property=property, image_url=image_url, reviews=reviews_list, bookings_list=bookings_list)
 
     @app.route('/delete_booking/<int:booking_id>', methods=['POST'])
     def delete_booking(booking_id):

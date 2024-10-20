@@ -1,5 +1,6 @@
 from flask import render_template, request, session, redirect, flash
 from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 from functools import wraps
 import users
 import logging
@@ -60,6 +61,30 @@ def init_user_routes(app):
             Response: The rendered 'loginview.html' template.
         """
         return render_template("loginview.html")
+
+    @app.route("/delete_user", methods=["POST"])
+    def delete_user():
+        """
+        Route to handle deleting a user and all related data.
+
+        Returns:
+            Response: Redirects to the home page with a success message after deleting the user.
+        """
+        if 'user_id' not in session:
+            return redirect("/loginview")
+
+        user_id = session['user_id']
+        print("Deleting user", user_id)
+
+        result = users.delete_user_related_data(user_id)
+
+        if result:
+            session.clear()
+            flash("User and all related data deleted successfully", "success")
+        else:
+            flash("Error deleting user data", "error")
+
+        return redirect("/")
 
     @app.route("/registerview")
     def registerview():
@@ -147,15 +172,27 @@ def init_user_routes(app):
 
         user_id = session['user_id']
         password = request.form["password"]
+        password2 = request.form["password2"]
         email = request.form["email"]
         phone = request.form["phone"]
 
-        if users.update_user_profile(user_id, email, phone, password):
+        if password != password2:
+            flash("Passwords do not match", "error")
+            return redirect("/profileview")
+
+        if password and len(password) < 8:
+            flash(
+                'Password is too short. It must be at least 8 characters long.', 'error')
+            return redirect("/profileview")
+
+        hashed_password = generate_password_hash(password)
+
+        if users.update_user_profile(user_id, email, phone, hashed_password):
             flash("Profile updated successfully", "success")
         else:
             flash("Error updating profile", "error")
 
-        return redirect("/profileview")
+        return redirect("/logout")
 
     @app.route("/add_property_review", methods=["POST"])
     def add_property_review():
@@ -182,20 +219,30 @@ def init_user_routes(app):
         email = request.form["email"]
         phone = request.form["phone"]
 
-        if not username or not psswd1 or not psswd2:
-            flash('Passwords do not match.', 'error')
+        if not username or not psswd1 or not psswd2 or not email or not phone:
+            flash('All fields are required.', 'error')
             return render_template("registerview.html")
+
         if psswd1 != psswd2:
             flash('Passwords do not match.', 'error')
+            return render_template("registerview.html")
+
+        if len(psswd1) < 8:
+            flash(
+                'Password is too short. It must be at least 8 characters long.', 'error')
             return render_template("registerview.html")
 
         if users.check_user_in_db(username):
             flash('Username already exists.', 'error')
             return render_template("registerview.html")
 
-        if users.add_new_user(psswd1, username, email, phone):
-            flash("Username successfully created", "success")
+        hashed_password = generate_password_hash(psswd1)
+        if users.add_new_user(hashed_password, username, email, phone):
+            flash("User successfully created", "success")
             return redirect("/loginview")
+
+        flash("An error occurred while creating the user.", "error")
+        return render_template("registerview.html")
 
     @app.route("/logout")
     @login_required

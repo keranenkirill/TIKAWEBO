@@ -9,6 +9,11 @@
 <body>
     <div class="container">
         <h1>Login</h1>
+        <div class="back-home">
+            <form action="/" method="get">
+                <button type="submit" class="btn">Main</button>
+            </form>
+        </div>
         {% from "messages.html" import display_message %}
         {{ display_message(get_flashed_messages(with_categories=True)) }}
 
@@ -28,6 +33,7 @@
             </div>
             <button type="submit" class="btn">login</button>
         </form>
+        
         <a href="/registerview" class="register_btn">register</a>
         {% endif %}
     </div>
