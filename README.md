@@ -50,7 +50,6 @@ Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
 
 ### Kehityksessä 🚧
 
-- mikäli listatulla kohteella on varauksia, varmennus kohteen poistamisesta ja siihen liittyvien varauksien poistaisesta
 - kokemus-kommentin poistaminen
 
 ### Kehitysideoita ✨
