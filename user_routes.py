@@ -74,7 +74,6 @@ def init_user_routes(app):
             return redirect("/loginview")
 
         user_id = session['user_id']
-        print("Deleting user", user_id)
 
         result = users.delete_user_related_data(user_id)
 

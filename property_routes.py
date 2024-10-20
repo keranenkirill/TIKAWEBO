@@ -2,6 +2,7 @@ from flask import render_template, request, session, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
 import properties
+import users
 from datetime import datetime
 import reviews
 
@@ -110,9 +111,12 @@ def init_property_routes(app):
             return redirect("/loginview")
 
         user_id = session['user_id']
+
+        userprofile = users.get_userprofile_by_id(user_id)
+
         bookings = properties.get_user_bookings(
             user_id)  # Fetch bookings from the database
-        return render_template("profileview.html", rented_properties=bookings)
+        return render_template("profileview.html", rented_properties=bookings, userprofile=userprofile)
 
     @app.route("/book_property/<int:property_id>", methods=["POST"])
     def book_property(property_id):
@@ -176,7 +180,6 @@ def init_property_routes(app):
         reviews_list = reviews.get_reviews_by_property(property_id)
 
         bookings_list = properties.get_bookings_by_property_id(property_id)
-        print(bookings_list)
         image_url = url_for('static', filename=f'images/{property.image_url}')
         return render_template("bookingview.html", property=property, image_url=image_url, reviews=reviews_list, bookings_list=bookings_list)
 
@@ -213,17 +216,19 @@ def init_property_routes(app):
             property_id (int): The ID of the property to be deleted.
 
         Returns:
-            Response: Redirects to the home page with success or failure messages.
+            Response: Redirects to the profile page with success or failure messages.
         """
         if 'user_id' not in session:
             return redirect('/loginview')
 
         user_id = session['user_id']
+
+        # Check if property has bookings and try to delete
         result = properties.delete_property(property_id, user_id)
 
         if result:
             flash('Property deleted successfully!', 'success')
         else:
-            flash('Failed to delete property.', 'error')
+            flash('Property has existing bookings and cannot be deleted.', 'alert')
 
         return redirect('/profileview')

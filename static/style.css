@@ -228,6 +228,16 @@ p.success {
    text-align: center;
 }
 
+p.alert {
+   color: #ffa600;  /* Green for success messages */
+   background-color: #ebd8b5;
+   border: 1px solid #e2d9c7;
+   padding: 10px;
+   border-radius: 5px;
+   margin-bottom: 20px;
+   text-align: center;
+}
+
 p.error {
    color: #dc3545;  /* Red for error messages */
    background-color: #f8d7da;

@@ -100,7 +100,7 @@
                                 <p><strong>Price:</strong> ${{ property.price }}</p>
                                 <p>{{ property.description }}</p>
                             </div>
-                            <form action="/delete_property/{{ property.id }}" method="POST">
+                            <form action="/delete_property/{{ property.id }}" method="POST" onsubmit="return confirmDelete();">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="btn btn-danger">Delete Property</button>
                             </form>
@@ -160,6 +160,12 @@
                 showEditProfileButton.classList.remove('active');
             });
         });
+    </script>
+    
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this property? This action cannot be undone.");
+        }
     </script>
 </body>
 </html>

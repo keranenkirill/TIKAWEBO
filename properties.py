@@ -113,7 +113,6 @@ def get_user_listed_properties(user_id):
     WHERE user_id = :user_id;
     """)
     result = db.session.execute(query, {'user_id': user_id}).fetchall()
-    print("USER LISTED PROPERTIES:", result)
     return result
 
 
@@ -171,7 +170,6 @@ def delete_booking(booking_id, user_id):
     Raises:
         Exception: If there is an error deleting the booking.
     """
-    print("BOOKING ID:", booking_id, user_id)
     try:
         sql = text("""
             DELETE FROM bookings
@@ -215,27 +213,35 @@ def get_bookings_by_property_id(property_id):
 
 def delete_property(property_id, user_id):
     """
-    Deletes a property listed by a user.
+    Deletes a property listed by the user if there are no bookings for it.
 
     Args:
         property_id (int): The ID of the property to be deleted.
-        user_id (int): The ID of the user who listed the property.
+        user_id (int): The ID of the user trying to delete the property.
 
     Returns:
         bool: True if the property was successfully deleted, False otherwise.
-
-    Raises:
-        Exception: If there is an error deleting the property.
     """
     try:
-        sql = text("""
-            DELETE FROM properties
-            WHERE id = :property_id AND user_id = :user_id
+        # Check if the property has any bookings
+        sql_check_bookings = text("""
+            SELECT COUNT(*) FROM bookings WHERE property_id = :property_id
         """)
-        db.session.execute(
-            sql, {'property_id': property_id, 'user_id': user_id})
+        result = db.session.execute(
+            sql_check_bookings, {"property_id": property_id}).scalar()
+
+        if result > 0:
+            return False  # Property has bookings, cannot delete
+
+        # Proceed to delete the property
+        sql_delete_property = text("""
+            DELETE FROM properties WHERE id = :property_id AND user_id = :user_id
+        """)
+        db.session.execute(sql_delete_property, {
+                           "property_id": property_id, "user_id": user_id})
         db.session.commit()
         return True
+
     except Exception as e:
         print(f"Error deleting property: {e}")
         db.session.rollback()
