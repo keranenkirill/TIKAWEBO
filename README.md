@@ -1,6 +1,8 @@
-# Rent&Stay - Web-sovellus 🏠
+# Rent&Stay - Web-sovellus 🏠   
 
-## [**Asennusohje & Käyttöohje**](DOKUMENTAATIO/asennusohje.md)  
+## [**LOPPUPALAUTUS**](https://github.com/keranenkirill/TIKAWEBO/releases/tag/LOPPUPALAUTUS) :rocket:
+### [**Asennusohje & Käyttöohje**](DOKUMENTAATIO/asennusohje.md) 🛠️
+
 📊 [_Kirjanpito & työtila_](https://trello.com/invite/b/66dd979b69f8fe952329e9df/ATTIdecd3e46f5556f7fad0b770e17d14b7f159592A9/tikawebo)  
 🤖 [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](DOKUMENTAATIO/chatgpt_selvitys.md)
 
@@ -48,6 +50,7 @@ Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
 
 ### Kehityksessä 🚧
 
+- mikäli listatulla kohteella on varauksia, varmennus kohteen poistamisesta ja siihen liittyvien varauksien poistaisesta
 - kokemus-kommentin poistaminen
 
 ### Kehitysideoita ✨
@@ -55,4 +58,3 @@ Sovellus käyttää **PostgreSQL**-tietokantaa. Seuraavat taulut löytyvät:
 - 👍 Tykkäykset
 - listaaminen suosion perusteella
 - keskiarvon antaminen kohteille
-
